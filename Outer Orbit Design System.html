@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Outer Orbit — Design System v1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* ============ TOKENS ============ */
+:root {
+  /* Color */
+  --bg: #0B0D10;
+  --bg-elev: #121418;
+  --bg-card: #16191E;
+  --bg-card-2: #1C2027;
+  --line: #23272E;
+  --line-strong: #2F343C;
+  --fg: #F2F3F5;
+  --fg-dim: #A5ABB5;
+  --fg-mute: #6B7280;
+  --accent: #3B7BC7;
+  --accent-hi: #5A96DC;
+  --accent-ink: #F2F3F5;
+  --accent-tint: color-mix(in srgb, var(--accent) 14%, transparent);
+  --accent-tint-strong: color-mix(in srgb, var(--accent) 24%, transparent);
+  --warn: #FF5B3A;
+  --ok: #3DE6A8;
+  --caution: #FFC24D;
+
+  /* Spacing — 4pt base */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+  /* Radii */
+  --r-0: 0px;  --r-1: 2px;  --r-2: 4px;  --r-3: 8px;
+  --r-4: 12px; --r-pill: 999px;
+
+  /* Shadow / elevation */
+  --el-0: none;
+  --el-1: 0 1px 0 0 var(--line), 0 1px 2px rgba(0,0,0,.4);
+  --el-2: 0 2px 0 0 var(--line-strong), 0 4px 12px rgba(0,0,0,.55);
+  --el-3: 0 0 0 1px var(--line-strong), 0 16px 40px rgba(0,0,0,.7);
+  --el-focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+
+  /* Type */
+  --ff-sans: 'Space Grotesk', system-ui, sans-serif;
+  --ff-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ff-serif: 'Instrument Serif', 'Times New Roman', serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-sans);
+  font-feature-settings: 'ss01','ss02';
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.page { max-width: 1320px; margin: 0 auto; padding: 0 40px 160px; }
+
+/* ============ TOPBAR ============ */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: 1320px; margin: 0 auto;
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.topbar-left { display: flex; align-items: center; gap: 14px; }
+.topbar-mark { width: 28px; height: 28px; color: var(--fg); }
+.topbar-title { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-dim); font-family: var(--ff-mono); }
+.topbar-title b { color: var(--fg); font-weight: 500; }
+.topbar-right { display: flex; align-items: center; gap: 16px; }
+.topbar-link {
+  font-family: var(--ff-mono);
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-dim); text-decoration: none;
+  padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  transition: all .2s;
+}
+.topbar-link:hover { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.topbar-badge {
+  font-family: var(--ff-mono);
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent);
+  padding: 8px 12px;
+  background: var(--accent-tint);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: var(--r-pill);
+}
+
+/* ============ HERO ============ */
+.hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px; opacity: .35;
+  mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center; }
+.hero-eyebrow { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+.hero-eyebrow::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: pulse 2s infinite ease-in-out; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+.hero h1 { font-size: clamp(56px, 7vw, 108px); line-height: .92; letter-spacing: -.03em; font-weight: 600; margin: 0 0 24px; }
+.hero h1 em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--accent); }
+.hero-sub { color: var(--fg-dim); font-size: 18px; max-width: 520px; text-wrap: pretty; }
+.hero-meta { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; font-family: var(--ff-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.hero-meta > div { border-top: 1px solid var(--line-strong); padding-top: 10px; }
+.hero-meta label { color: var(--fg-mute); display: block; margin-bottom: 4px; }
+.hero-meta span { color: var(--fg); }
+
+.hero-preview {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  padding: 28px;
+  display: grid; grid-template-rows: auto 1fr auto; gap: 14px;
+  position: relative;
+}
+.hero-preview-tag { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+.hero-preview-body { display: grid; gap: 8px; align-content: center; }
+
+/* ============ SECTION SCAFFOLD ============ */
+section.sec { padding: 96px 0; border-bottom: 1px solid var(--line); }
+.sec-head { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.sec-num { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-mute); }
+.sec-num b { color: var(--accent); font-weight: 500; }
+.sec-title { font-size: clamp(32px, 4vw, 52px); line-height: 1; letter-spacing: -.02em; font-weight: 500; margin: 0; text-wrap: balance; }
+.sec-title em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--fg-dim); }
+.sec-lede { color: var(--fg-dim); font-size: 16px; text-wrap: pretty; }
+.label { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+
+/* ============ TOKENS GRID ============ */
+.tokens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.token {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; border: 1px solid var(--line); background: var(--bg-card);
+}
+.token-chip { width: 36px; height: 36px; border: 1px solid var(--line-strong); flex-shrink: 0; }
+.token-info { font-family: var(--ff-mono); font-size: 11px; line-height: 1.6; }
+.token-info .tk-name { color: var(--fg); letter-spacing: .04em; }
+.token-info .tk-val { color: var(--fg-mute); letter-spacing: .04em; }
+
+/* ============ SPACING SCALE ============ */
+.spacing { display: grid; grid-template-columns: 120px 120px 1fr; gap: 24px; padding: 16px 24px; border-bottom: 1px solid var(--line); align-items: center; }
+.spacing:first-child { border-top: 1px solid var(--line); }
+.spacing-name { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .1em; color: var(--fg); text-transform: uppercase; }
+.spacing-val { font-family: var(--ff-mono); font-size: 11px; color: var(--fg-mute); }
+.spacing-bar { height: 14px; background: var(--accent); }
+
+/* ============ RADII / SHADOW ============ */
+.radii, .shadows { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.radius-tile, .shadow-tile {
+  aspect-ratio: 1; background: var(--bg-card); border: 1px solid var(--line);
+  display: grid; place-items: center; position: relative;
+  padding: 16px;
+}
+.radius-demo { width: 60%; height: 60%; background: var(--accent); }
+.shadow-tile { background: var(--bg); border: 0; }
+.shadow-demo { width: 72%; height: 60%; background: var(--bg-card); border: 1px solid var(--line); }
+.radius-caption, .shadow-caption {
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-mute);
+}
+
+/* ============ BUTTONS ============ */
+.btn {
+  font-family: var(--ff-sans);
+  font-weight: 500;
+  letter-spacing: -.005em;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: var(--r-2);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all .15s ease;
+  background: var(--accent); color: var(--accent-ink);
+}
+.btn:hover { background: var(--accent-hi); }
+.btn:focus-visible { outline: none; box-shadow: var(--el-focus); }
+.btn.sm { padding: 6px 12px; font-size: 12px; }
+.btn.lg { padding: 14px 22px; font-size: 15px; }
+.btn.secondary { background: var(--bg-card); color: var(--fg); border-color: var(--line-strong); }
+.btn.secondary:hover { background: var(--bg-card-2); border-color: var(--fg-mute); }
+.btn.ghost { background: transparent; color: var(--fg-dim); }
+.btn.ghost:hover { color: var(--fg); background: var(--bg-card); }
+.btn.danger { background: var(--warn); color: var(--bg); }
+.btn.danger:hover { background: color-mix(in srgb, var(--warn) 80%, #fff); }
+.btn[disabled], .btn.disabled { opacity: .45; cursor: not-allowed; }
+.btn.mono { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 10px 16px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.component-frame {
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--bg-card);
+  padding: 40px;
+  display: flex; flex-direction: column; gap: 24px;
+  position: relative;
+}
+.component-frame::before {
+  content: attr(data-label);
+  position: absolute; top: 12px; left: 14px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ============ FORM INPUTS ============ */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-dim); }
+.input, .select, .textarea {
+  font-family: var(--ff-sans); font-size: 14px;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--line-strong);
+  padding: 10px 14px;
+  border-radius: var(--r-2);
+  transition: border-color .15s, box-shadow .15s;
+  outline: none;
+  width: 100%;
+}
+.input::placeholder, .textarea::placeholder { color: var(--fg-mute); }
+.input:focus, .select:focus, .textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-tint); }
+.input.error, .select.error { border-color: var(--warn); }
+.textarea { resize: vertical; min-height: 84px; }
+.field-help { font-size: 12px; color: var(--fg-mute); }
+.field-help.error { color: var(--warn); }
+
+.check-row { display: flex; flex-direction: column; gap: 10px; }
+.check {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; cursor: pointer; user-select: none;
+}
+.check input { position: absolute; opacity: 0; pointer-events: none; }
+.check .box {
+  width: 16px; height: 16px; border: 1px solid var(--line-strong); background: var(--bg);
+  border-radius: var(--r-1);
+  display: grid; place-items: center;
+  transition: all .15s;
+}
+.check .box svg { width: 10px; height: 10px; color: var(--accent-ink); opacity: 0; }
+.check input:checked + .box { background: var(--accent); border-color: var(--accent); }
+.check input:checked + .box svg { opacity: 1; }
+.check input:focus-visible + .box { box-shadow: 0 0 0 3px var(--accent-tint); }
+.radio .box { border-radius: 50%; }
+.radio .box::after { content: ''; width: 6px; height: 6px; background: var(--accent-ink); border-radius: 50%; opacity: 0; transition: opacity .15s; }
+.radio input:checked + .box { background: var(--accent); border-color: var(--accent); }
+.radio input:checked + .box::after { opacity: 1; }
+.radio .box svg { display: none; }
+
+.toggle { position: relative; width: 36px; height: 20px; background: var(--bg-card-2); border-radius: var(--r-pill); transition: background .2s; border: 1px solid var(--line-strong); }
+.toggle::after { content: ''; position: absolute; width: 14px; height: 14px; top: 2px; left: 2px; background: var(--fg-dim); border-radius: 50%; transition: all .2s; }
+.check input:checked + .toggle { background: var(--accent); border-color: var(--accent); }
+.check input:checked + .toggle::after { left: 18px; background: var(--accent-ink); }
+
+/* ============ TABLES ============ */
+.table-wrap { border: 1px solid var(--line); overflow: hidden; }
+table.data { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.data thead th {
+  background: var(--bg-elev); color: var(--fg-dim);
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 500; text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+table.data tbody td { padding: 14px 16px; border-bottom: 1px solid var(--line); color: var(--fg); }
+table.data tbody tr:last-child td { border-bottom: 0; }
+table.data tbody tr:hover td { background: var(--bg-elev); }
+table.data .num { font-family: var(--ff-mono); color: var(--fg-dim); text-align: right; }
+
+/* ============ BADGES / TAGS ============ */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: var(--r-pill);
+  background: var(--bg-card-2); color: var(--fg-dim);
+  border: 1px solid var(--line-strong);
+}
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--fg-mute); }
+.badge.ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.badge.ok::before { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
+.badge.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.badge.warn::before { background: var(--warn); }
+.badge.accent { color: var(--accent-hi); border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: var(--accent-tint); }
+.badge.accent::before { background: var(--accent); }
+.badge.caution { color: var(--caution); border-color: color-mix(in srgb, var(--caution) 40%, transparent); background: color-mix(in srgb, var(--caution) 12%, transparent); }
+.badge.caution::before { background: var(--caution); }
+
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 4px 10px; background: var(--bg-card-2); border: 1px solid var(--line-strong); border-radius: var(--r-2); color: var(--fg-dim); }
+.tag .x { opacity: .6; cursor: pointer; }
+
+/* ============ ALERTS ============ */
+.alert {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start;
+  padding: 16px 18px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-card);
+  border-radius: var(--r-2);
+}
+.alert .icn { width: 18px; height: 18px; color: var(--fg-dim); margin-top: 2px; }
+.alert .body h5 { margin: 0 0 4px; font-size: 14px; font-weight: 500; }
+.alert .body p { margin: 0; color: var(--fg-dim); font-size: 13px; }
+.alert .close { background: transparent; border: 0; color: var(--fg-mute); cursor: pointer; font-size: 16px; line-height: 1; }
+.alert.accent { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: var(--accent-tint); }
+.alert.accent .icn { color: var(--accent-hi); }
+.alert.ok { border-color: color-mix(in srgb, var(--ok) 40%, transparent); background: color-mix(in srgb, var(--ok) 10%, transparent); }
+.alert.ok .icn { color: var(--ok); }
+.alert.warn { border-color: color-mix(in srgb, var(--warn) 40%, transparent); background: color-mix(in srgb, var(--warn) 10%, transparent); }
+.alert.warn .icn { color: var(--warn); }
+
+/* ============ CARDS ============ */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.surface-card {
+  border: 1px solid var(--line); background: var(--bg-card);
+  padding: 24px; display: flex; flex-direction: column; gap: 14px;
+  border-radius: var(--r-2);
+  transition: all .2s;
+}
+.surface-card:hover { border-color: var(--line-strong); background: var(--bg-card-2); }
+.surface-card .sc-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.surface-card .sc-title { font-size: 18px; font-weight: 500; letter-spacing: -.01em; }
+.surface-card .sc-meta { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+.surface-card .sc-desc { color: var(--fg-dim); font-size: 13px; }
+.surface-card .sc-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--fg-mute); font-family: var(--ff-mono); letter-spacing: .1em; text-transform: uppercase; }
+
+/* ============ NAV / TABS ============ */
+.tabs { display: flex; border-bottom: 1px solid var(--line); gap: 0; }
+.tabs button {
+  background: transparent; border: 0;
+  font-family: var(--ff-sans); font-size: 14px; color: var(--fg-dim); font-weight: 500;
+  padding: 12px 16px; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all .15s;
+}
+.tabs button:hover { color: var(--fg); }
+.tabs button.active { color: var(--fg); border-bottom-color: var(--accent); }
+
+.pill-nav { display: inline-flex; gap: 3px; padding: 3px; background: var(--bg-card); border-radius: var(--r-pill); border: 1px solid var(--line); }
+.pill-nav button {
+  background: transparent; border: 0;
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--fg-dim); padding: 8px 14px; cursor: pointer; border-radius: var(--r-pill);
+  transition: all .15s;
+}
+.pill-nav button.active { background: var(--accent); color: var(--accent-ink); }
+.pill-nav button:not(.active):hover { color: var(--fg); }
+
+/* ============ PROGRESS / STATUS ============ */
+.progress { height: 6px; background: var(--bg-card-2); border-radius: var(--r-pill); overflow: hidden; border: 1px solid var(--line); }
+.progress-bar { height: 100%; background: var(--accent); transition: width .3s; }
+.telemetry {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--fg-dim);
+  display: flex; align-items: center; gap: 10px;
+}
+.telemetry::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 6px var(--ok); animation: pulse 2s infinite; }
+
+/* ============ LAYOUT / GRID DEMO ============ */
+.grid-demo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; }
+.grid-demo > div { height: 40px; background: var(--accent-tint); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); display: grid; place-items: center; font-family: var(--ff-mono); font-size: 10px; color: var(--accent-hi); letter-spacing: .1em; }
+
+.bp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.bp-table th, .bp-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); text-align: left; }
+.bp-table th { color: var(--fg-dim); font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; }
+.bp-table td.mono { font-family: var(--ff-mono); color: var(--fg-dim); }
+
+/* ============ FOOTER ============ */
+footer.foot {
+  padding: 80px 0 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;
+}
+.foot-mark { width: 48px; color: var(--fg); margin-bottom: 16px; }
+.foot-title { font-size: 24px; font-weight: 500; letter-spacing: -.01em; max-width: 400px; }
+.foot-meta { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute); text-align: right; line-height: 2; }
+
+/* responsive */
+@media (max-width: 960px) {
+  .page { padding: 0 20px 80px; }
+  .topbar-inner { padding: 12px 20px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .sec-head { grid-template-columns: 1fr; gap: 16px; }
+  .tokens-grid { grid-template-columns: 1fr; }
+  .radii, .shadows { grid-template-columns: repeat(3, 1fr); }
+  .cards { grid-template-columns: 1fr; }
+  .grid-demo { grid-template-columns: repeat(4, 1fr); }
+  .hero-meta { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr !important; }
+}
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <svg class="topbar-mark" viewBox="179 -30 260 260" fill="currentColor">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+      <div class="topbar-title">Outer Orbit · <b>Design System v1.0</b></div>
+    </div>
+    <div class="topbar-right">
+      <a class="topbar-link" href="Outer Orbit Brand Guidelines.html">← Brand Guidelines</a>
+      <span class="topbar-badge">v1.0 · Mission Control</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Outer Orbit · Design System · v1.0</div>
+      <h1>The working <em>parts.</em></h1>
+      <p class="hero-sub">Tokens, components, and layout primitives built from the Mission Control brand. This document is the single source of truth for building product and web — everything else inherits from here.</p>
+      <div class="hero-meta">
+        <div><label>Base unit</label><span>4px</span></div>
+        <div><label>Grid</label><span>12 col / 80px</span></div>
+        <div><label>Accent</label><span>Steel · #3B7BC7</span></div>
+      </div>
+    </div>
+    <div class="hero-preview">
+      <span class="hero-preview-tag">// LIVE COMPONENTS</span>
+      <div class="hero-preview-body">
+        <div class="btn-row">
+          <button class="btn">Deploy</button>
+          <button class="btn secondary">Cancel</button>
+        </div>
+        <div class="btn-row" style="gap: 8px;">
+          <span class="badge ok">Online</span>
+          <span class="badge accent">v1.0</span>
+          <span class="badge caution">Beta</span>
+        </div>
+        <div class="progress"><div class="progress-bar" style="width: 68%;"></div></div>
+        <div class="telemetry">SYS · OUTER.ORBIT // ONLINE</div>
+      </div>
+      <span class="hero-preview-tag" style="text-align:right;">12 components · 38 tokens</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 TOKENS ============ -->
+<section class="sec" id="tokens">
+  <div class="sec-head">
+    <div class="sec-num"><b>01</b> / Tokens</div>
+    <h2 class="sec-title">The <em>source of truth.</em></h2>
+    <p class="sec-lede">Every color, space, radius, and shadow in the system is expressed as a CSS custom property. Copy this block into any project and the rest of the system works.</p>
+  </div>
+
+  <div class="label" style="margin-bottom: 16px;">Color</div>
+  <div class="tokens-grid">
+    <div class="token"><div class="token-chip" style="background:#0B0D10;"></div><div class="token-info"><div class="tk-name">--bg</div><div class="tk-val">#0B0D10</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#121418;"></div><div class="token-info"><div class="tk-name">--bg-elev</div><div class="tk-val">#121418</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#16191E;"></div><div class="token-info"><div class="tk-name">--bg-card</div><div class="tk-val">#16191E</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#1C2027;"></div><div class="token-info"><div class="tk-name">--bg-card-2</div><div class="tk-val">#1C2027</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#23272E;"></div><div class="token-info"><div class="tk-name">--line</div><div class="tk-val">#23272E</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#2F343C;"></div><div class="token-info"><div class="tk-name">--line-strong</div><div class="tk-val">#2F343C</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#F2F3F5;"></div><div class="token-info"><div class="tk-name">--fg</div><div class="tk-val">#F2F3F5</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#A5ABB5;"></div><div class="token-info"><div class="tk-name">--fg-dim</div><div class="tk-val">#A5ABB5</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#6B7280;"></div><div class="token-info"><div class="tk-name">--fg-mute</div><div class="tk-val">#6B7280</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#3B7BC7;"></div><div class="token-info"><div class="tk-name">--accent</div><div class="tk-val">#3B7BC7</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#5A96DC;"></div><div class="token-info"><div class="tk-name">--accent-hi</div><div class="tk-val">#5A96DC</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#3DE6A8;"></div><div class="token-info"><div class="tk-name">--ok</div><div class="tk-val">#3DE6A8</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#FFC24D;"></div><div class="token-info"><div class="tk-name">--caution</div><div class="tk-val">#FFC24D</div></div></div>
+    <div class="token"><div class="token-chip" style="background:#FF5B3A;"></div><div class="token-info"><div class="tk-name">--warn</div><div class="tk-val">#FF5B3A</div></div></div>
+  </div>
+</section>
+
+<!-- ============ 02 SPACING ============ -->
+<section class="sec" id="spacing">
+  <div class="sec-head">
+    <div class="sec-num"><b>02</b> / Spacing</div>
+    <h2 class="sec-title">4-point base, <em>multiplied.</em></h2>
+    <p class="sec-lede">A strict 4px scale. Never use arbitrary values in product code; if you need something off-scale, add it here first. Most UI uses sp-2, sp-4, sp-6.</p>
+  </div>
+  <div>
+    <div class="spacing"><span class="spacing-name">--sp-1</span><span class="spacing-val">4px</span><div class="spacing-bar" style="width:4px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-2</span><span class="spacing-val">8px</span><div class="spacing-bar" style="width:8px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-3</span><span class="spacing-val">12px</span><div class="spacing-bar" style="width:12px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-4</span><span class="spacing-val">16px</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-5</span><span class="spacing-val">20px</span><div class="spacing-bar" style="width:20px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-6</span><span class="spacing-val">24px</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-8</span><span class="spacing-val">32px</span><div class="spacing-bar" style="width:32px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-10</span><span class="spacing-val">40px</span><div class="spacing-bar" style="width:40px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-12</span><span class="spacing-val">48px</span><div class="spacing-bar" style="width:48px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-16</span><span class="spacing-val">64px</span><div class="spacing-bar" style="width:64px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-20</span><span class="spacing-val">80px</span><div class="spacing-bar" style="width:80px;"></div></div>
+    <div class="spacing"><span class="spacing-name">--sp-24</span><span class="spacing-val">96px</span><div class="spacing-bar" style="width:96px;"></div></div>
+  </div>
+</section>
+
+<!-- ============ 03 RADII + SHADOW ============ -->
+<section class="sec" id="radii">
+  <div class="sec-head">
+    <div class="sec-num"><b>03</b> / Radii &amp; Elevation</div>
+    <h2 class="sec-title">Mostly <em>sharp.</em> Sparingly soft.</h2>
+    <p class="sec-lede">Hardware-grade radii — 0, 2, 4, 8, 12 px, plus pill. Elevation is a two-stop system: a hairline shadow for cards, a deeper one for modals. Avoid soft, diffuse shadows.</p>
+  </div>
+
+  <div class="label" style="margin-bottom: 16px;">Radii</div>
+  <div class="radii">
+    <div class="radius-tile"><div class="radius-demo" style="border-radius:0;"></div><span class="radius-caption">--r-0 · 0px</span></div>
+    <div class="radius-tile"><div class="radius-demo" style="border-radius:2px;"></div><span class="radius-caption">--r-1 · 2px</span></div>
+    <div class="radius-tile"><div class="radius-demo" style="border-radius:4px;"></div><span class="radius-caption">--r-2 · 4px</span></div>
+    <div class="radius-tile"><div class="radius-demo" style="border-radius:8px;"></div><span class="radius-caption">--r-3 · 8px</span></div>
+    <div class="radius-tile"><div class="radius-demo" style="border-radius:12px;"></div><span class="radius-caption">--r-4 · 12px</span></div>
+    <div class="radius-tile"><div class="radius-demo" style="border-radius:999px;"></div><span class="radius-caption">--r-pill</span></div>
+  </div>
+
+  <div class="label" style="margin-top:48px; margin-bottom: 16px;">Elevation</div>
+  <div class="shadows">
+    <div class="shadow-tile"><div class="shadow-demo" style="box-shadow: none;"></div><span class="shadow-caption">--el-0 · none</span></div>
+    <div class="shadow-tile"><div class="shadow-demo" style="box-shadow: var(--el-1);"></div><span class="shadow-caption">--el-1 · card</span></div>
+    <div class="shadow-tile"><div class="shadow-demo" style="box-shadow: var(--el-2);"></div><span class="shadow-caption">--el-2 · popover</span></div>
+    <div class="shadow-tile"><div class="shadow-demo" style="box-shadow: var(--el-3);"></div><span class="shadow-caption">--el-3 · modal</span></div>
+    <div class="shadow-tile"><div class="shadow-demo" style="box-shadow: var(--el-focus);"></div><span class="shadow-caption">--el-focus</span></div>
+    <div class="shadow-tile"><div class="shadow-demo" style="outline: 1px solid var(--accent);"></div><span class="shadow-caption">outline · accent</span></div>
+  </div>
+</section>
+
+<!-- ============ 04 TYPE ============ -->
+<section class="sec" id="type">
+  <div class="sec-head">
+    <div class="sec-num"><b>04</b> / Type</div>
+    <h2 class="sec-title">Three families, <em>tight roles.</em></h2>
+    <p class="sec-lede">See Brand Guidelines for the full treatment. In product, stick to 500-weight Space Grotesk for UI, JetBrains Mono for meta/telemetry, and reserve Instrument Serif italic for marketing moments only.</p>
+  </div>
+
+  <div class="component-frame" data-label="TYPE · SAMPLE">
+    <div style="font-family: var(--ff-sans); font-size: 72px; font-weight: 500; letter-spacing: -.02em; line-height: .95;">Launch things<br>into <em style="font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--accent-hi);">orbit.</em></div>
+    <div style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute);">SYS · OUTER.ORBIT // V1.0 · MISSION-CONTROL</div>
+  </div>
+</section>
+
+<!-- ============ 05 BUTTONS ============ -->
+<section class="sec" id="buttons">
+  <div class="sec-head">
+    <div class="sec-num"><b>05</b> / Buttons</div>
+    <h2 class="sec-title">Four intents, <em>three sizes.</em></h2>
+    <p class="sec-lede">Primary is Steel. Secondary is a neutral card surface. Ghost removes chrome for inline actions. Danger is only for destructive confirmations. Never mix two primaries in one view.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="component-frame" data-label="BUTTON · INTENTS">
+      <div class="btn-row">
+        <button class="btn">Deploy</button>
+        <button class="btn secondary">Cancel</button>
+        <button class="btn ghost">Learn more</button>
+        <button class="btn danger">Delete</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn mono">SYS · ONLINE</button>
+        <button class="btn secondary">← Back</button>
+        <button class="btn" disabled>Disabled</button>
+      </div>
+    </div>
+    <div class="component-frame" data-label="BUTTON · SIZES">
+      <div class="btn-row">
+        <button class="btn sm">Small</button>
+        <button class="btn">Default</button>
+        <button class="btn lg">Large</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn secondary sm">Small</button>
+        <button class="btn secondary">Default</button>
+        <button class="btn secondary lg">Large</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 FORMS ============ -->
+<section class="sec" id="forms">
+  <div class="sec-head">
+    <div class="sec-num"><b>06</b> / Forms</div>
+    <h2 class="sec-title">Inputs, <em>built for density.</em></h2>
+    <p class="sec-lede">All inputs share the same 40px height, the same 4px radius, and focus with a steel-blue ring. Labels are mono-uppercase at 10/.14em to stay distinct from placeholder text.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="component-frame" data-label="INPUT · TEXT / SELECT / AREA">
+      <div class="field">
+        <label class="field-label">Project name</label>
+        <input class="input" placeholder="e.g. Volunteer Hub">
+      </div>
+      <div class="field">
+        <label class="field-label">Stage</label>
+        <select class="select"><option>Discovery</option><option>Build</option><option>Launch</option></select>
+      </div>
+      <div class="field">
+        <label class="field-label">Scope notes</label>
+        <textarea class="textarea" placeholder="A brief, plain-English description of the work…"></textarea>
+        <span class="field-help">Max 280 characters. Plain English, not jargon.</span>
+      </div>
+      <div class="field">
+        <label class="field-label">Email</label>
+        <input class="input error" value="devon@outerorbit" >
+        <span class="field-help error">Missing top-level domain (.ca, .com…)</span>
+      </div>
+    </div>
+    <div class="component-frame" data-label="CONTROLS · CHECK / RADIO / TOGGLE">
+      <div class="check-row">
+        <label class="check"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 5l3 3 5-6"/></svg></span>Send me launch updates</label>
+        <label class="check"><input type="checkbox"><span class="box"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 5l3 3 5-6"/></svg></span>Subscribe to the Academy newsletter</label>
+        <label class="check"><input type="checkbox"><span class="box"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 5l3 3 5-6"/></svg></span>Share anonymized usage data</label>
+      </div>
+      <div class="check-row" style="margin-top: 8px;">
+        <label class="check radio"><input type="radio" name="tier" checked><span class="box"></span>Starter · 1 advisor</label>
+        <label class="check radio"><input type="radio" name="tier"><span class="box"></span>Team · up to 5</label>
+        <label class="check radio"><input type="radio" name="tier"><span class="box"></span>Enterprise</label>
+      </div>
+      <div class="check-row" style="margin-top: 8px;">
+        <label class="check"><input type="checkbox" checked><span class="toggle"></span>Telemetry on</label>
+        <label class="check"><input type="checkbox"><span class="toggle"></span>Private workspace</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 BADGES / TAGS ============ -->
+<section class="sec" id="badges">
+  <div class="sec-head">
+    <div class="sec-num"><b>07</b> / Badges, Tags &amp; Status</div>
+    <h2 class="sec-title">Small, <em>specific, legible.</em></h2>
+    <p class="sec-lede">Badges carry status semantics — ok, accent, caution, warn. Tags are neutral and dismissible. Never use badges as decoration.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="component-frame" data-label="BADGE · SEMANTIC">
+      <div class="btn-row">
+        <span class="badge">Neutral</span>
+        <span class="badge ok">Online</span>
+        <span class="badge accent">v1.0</span>
+        <span class="badge caution">Beta</span>
+        <span class="badge warn">Offline</span>
+      </div>
+      <div class="btn-row" style="margin-top: 12px;">
+        <div class="telemetry">TELEMETRY · 128ms</div>
+        <div class="telemetry">UPTIME · 99.98%</div>
+      </div>
+    </div>
+    <div class="component-frame" data-label="TAG · DISMISSIBLE">
+      <div class="btn-row">
+        <span class="tag">AI strategy <span class="x">×</span></span>
+        <span class="tag">design systems <span class="x">×</span></span>
+        <span class="tag">workshop <span class="x">×</span></span>
+        <span class="tag">SMB <span class="x">×</span></span>
+        <span class="tag">non-profit <span class="x">×</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 ALERTS ============ -->
+<section class="sec" id="alerts">
+  <div class="sec-head">
+    <div class="sec-num"><b>08</b> / Alerts</div>
+    <h2 class="sec-title">Four tones. <em>Use them sparingly.</em></h2>
+    <p class="sec-lede">Info (accent), success (ok), caution, warn. Always lead with a 1-line headline, then a short descriptive sentence. Avoid stacks of alerts — if you have more than two, rethink the flow.</p>
+  </div>
+  <div class="component-frame" data-label="ALERT · INLINE" style="display: grid; gap: 14px;">
+    <div class="alert accent">
+      <svg class="icn" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><path d="M10 7v-1M10 9v5"/></svg>
+      <div class="body"><h5>Deployment scheduled for tonight.</h5><p>The Academy stack will be unavailable between 22:00 and 22:20 ET. No action required.</p></div>
+      <button class="close">×</button>
+    </div>
+    <div class="alert ok">
+      <svg class="icn" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 6-6"/></svg>
+      <div class="body"><h5>Form submitted.</h5><p>We'll reach out within one business day.</p></div>
+      <button class="close">×</button>
+    </div>
+    <div class="alert warn">
+      <svg class="icn" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l8 14H2z"/><path d="M10 8v4M10 14v.01"/></svg>
+      <div class="body"><h5>Integration disconnected.</h5><p>Reconnect your workspace to resume syncing volunteers.</p></div>
+      <button class="close">×</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 CARDS ============ -->
+<section class="sec" id="cards">
+  <div class="sec-head">
+    <div class="sec-num"><b>09</b> / Cards</div>
+    <h2 class="sec-title">Surfaces for <em>things you scan.</em></h2>
+    <p class="sec-lede">A card is a discrete, tappable unit of content with a title, optional meta, a body, and a mono footer. Hover state elevates subtly — never animates.</p>
+  </div>
+
+  <div class="cards">
+    <div class="surface-card">
+      <div class="sc-head">
+        <div>
+          <div class="sc-title">Volunteer Hub</div>
+          <span class="badge ok" style="margin-top:6px;">Live</span>
+        </div>
+        <span class="sc-meta">OO · 01</span>
+      </div>
+      <div class="sc-desc">A shift-scheduling tool for small non-profits. 2k active volunteers across three pilot orgs.</div>
+      <div class="sc-foot"><span>Shipped · Q1 2026</span><span>→</span></div>
+    </div>
+    <div class="surface-card">
+      <div class="sc-head">
+        <div>
+          <div class="sc-title">Orbit Academy</div>
+          <span class="badge caution" style="margin-top:6px;">Beta</span>
+        </div>
+        <span class="sc-meta">OO · 02</span>
+      </div>
+      <div class="sc-desc">Short-form courses teaching practical AI workflows to SMB operators.</div>
+      <div class="sc-foot"><span>Shipped · Q2 2026</span><span>→</span></div>
+    </div>
+    <div class="surface-card">
+      <div class="sc-head">
+        <div>
+          <div class="sc-title">Consulting</div>
+          <span class="badge accent" style="margin-top:6px;">Taking clients</span>
+        </div>
+        <span class="sc-meta">OO · 00</span>
+      </div>
+      <div class="sc-desc">AI adoption sprints for SMBs. Discovery → roadmap → pilot in 6 weeks.</div>
+      <div class="sc-foot"><span>Ongoing</span><span>→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 NAV ============ -->
+<section class="sec" id="nav">
+  <div class="sec-head">
+    <div class="sec-num"><b>10</b> / Navigation</div>
+    <h2 class="sec-title">Two flavors, <em>never both.</em></h2>
+    <p class="sec-lede">Tabs for primary page navigation. Pill-nav for in-component segmentation (filters, view modes). Mixing them on one screen creates uncertainty.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="component-frame" data-label="TABS">
+      <div class="tabs">
+        <button class="active">Overview</button>
+        <button>Components</button>
+        <button>Tokens</button>
+        <button>Changelog</button>
+      </div>
+    </div>
+    <div class="component-frame" data-label="PILL NAV">
+      <div class="pill-nav">
+        <button class="active">All</button>
+        <button>Product</button>
+        <button>Marketing</button>
+        <button>Docs</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 TABLE ============ -->
+<section class="sec" id="table">
+  <div class="sec-head">
+    <div class="sec-num"><b>11</b> / Table</div>
+    <h2 class="sec-title">Dense, <em>scannable, honest.</em></h2>
+    <p class="sec-lede">Meta-styled headers, 14px body, mono numbers right-aligned. Row hover is the only feedback. No zebra striping.</p>
+  </div>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Project</th><th>Stage</th><th>Owner</th><th class="num">Volunteers</th><th class="num">Uptime</th></tr></thead>
+      <tbody>
+        <tr><td>Volunteer Hub</td><td><span class="badge ok">Live</span></td><td>Devon</td><td class="num">2,104</td><td class="num">99.98%</td></tr>
+        <tr><td>Orbit Academy</td><td><span class="badge caution">Beta</span></td><td>Devon</td><td class="num">218</td><td class="num">99.71%</td></tr>
+        <tr><td>Consulting Engagements</td><td><span class="badge accent">Active</span></td><td>Devon</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Merch · FlatBrim</td><td><span class="badge">Planning</span></td><td>Devon</td><td class="num">0</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 12 GRID / BREAKPOINTS ============ -->
+<section class="sec" id="grid">
+  <div class="sec-head">
+    <div class="sec-num"><b>12</b> / Grid &amp; Breakpoints</div>
+    <h2 class="sec-title">12 columns, <em>honest gutters.</em></h2>
+    <p class="sec-lede">Max content width is 1320px. The grid is 12-column with 16px gutters, 40px outer padding. Mobile collapses to single column below 720px.</p>
+  </div>
+
+  <div class="component-frame" data-label="GRID · 12 COL">
+    <div class="grid-demo">
+      <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 24px;" class="component-frame" data-label="BREAKPOINTS">
+    <table class="bp-table">
+      <thead><tr><th>Name</th><th>From</th><th>Columns</th><th>Outer pad</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">xs</td><td class="mono">0–719</td><td class="mono">4</td><td class="mono">20px</td><td>Mobile · stacked</td></tr>
+        <tr><td class="mono">sm</td><td class="mono">720–959</td><td class="mono">8</td><td class="mono">24px</td><td>Tablet portrait</td></tr>
+        <tr><td class="mono">md</td><td class="mono">960–1279</td><td class="mono">12</td><td class="mono">32px</td><td>Laptop · default</td></tr>
+        <tr><td class="mono">lg</td><td class="mono">1280+</td><td class="mono">12</td><td class="mono">40px</td><td>Desktop · max 1320px</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 13 CHANGELOG ============ -->
+<section class="sec" id="changelog">
+  <div class="sec-head">
+    <div class="sec-num"><b>13</b> / Changelog</div>
+    <h2 class="sec-title">What's in <em>v1.0.</em></h2>
+    <p class="sec-lede">This is the first locked release. Future versions will only add — tokens never get renamed, components never break their public API without a major bump.</p>
+  </div>
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th>Version</th><th>Date</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>v1.0.0</td><td>22 · APR · 2026</td><td>Initial lock. Mission Control / Steel. 38 tokens, 12 components.</td></tr>
+        <tr><td>v0.2.0</td><td>22 · APR · 2026</td><td>Swapped accent from lime to steel blue. Deep Field direction retired.</td></tr>
+        <tr><td>v0.1.0</td><td>21 · APR · 2026</td><td>Brand identity explored in two directions (Mission Control / Deep Field).</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div>
+    <svg class="foot-mark" viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+    <div class="foot-title">Design System · v1.0 · Mission Control</div>
+    <div style="color: var(--fg-dim); font-size: 14px; margin-top: 8px; max-width: 480px;">Return to <a href="Outer Orbit Brand Guidelines.html" style="color: var(--accent-hi); text-decoration: none; border-bottom: 1px solid currentColor;">Brand Guidelines</a> for logo, voice, imagery, and templates.</div>
+  </div>
+  <div class="foot-meta">
+    Outer Orbit · v1.0<br>
+    22 · APR · 2026<br>
+    Locked
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

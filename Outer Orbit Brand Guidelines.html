@@ -1,0 +1,1195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Outer Orbit — Brand Identity</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* ---------- tokens ---------- */
+:root {
+  /* Mission Control (default) */
+  --bg: #0B0D10;
+  --bg-elev: #121418;
+  --bg-card: #16191E;
+  --line: #23272E;
+  --line-strong: #2F343C;
+  --fg: #F2F3F5;
+  --fg-dim: #A5ABB5;
+  --fg-mute: #6B7280;
+  --accent: #3B7BC7;      /* electric signal */
+  --accent-ink: #0B0D10;
+  --warn: #FF5B3A;
+  --ok: #3DE6A8;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-feature-settings: 'ss01', 'ss02';
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  line-height: 1.5;
+  transition: background .3s ease, color .3s ease;
+}
+
+/* ---------- layout ---------- */
+.page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px 160px;
+}
+
+/* ---------- sticky top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: 1320px; margin: 0 auto;
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.topbar-left { display: flex; align-items: center; gap: 14px; }
+.topbar-mark { width: 28px; height: 28px; color: var(--fg); }
+.topbar-title { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-dim); font-family: 'JetBrains Mono', monospace; }
+.topbar-title b { color: var(--fg); font-weight: 500; }
+
+.switch {
+  display: inline-flex; align-items: stretch;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 3px;
+  background: var(--bg-elev);
+}
+.switch button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 8px 16px;
+  border: 0; background: transparent; color: var(--fg-dim);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.switch button.active {
+  background: var(--accent); color: var(--accent-ink);
+}
+.switch button:not(.active):hover { color: var(--fg); }
+
+
+.topbar-right { display: flex; align-items: center; gap: 16px; }
+.topbar-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-dim); text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.topbar-link:hover { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.topbar-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent);
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+}
+/* ---------- hero ---------- */
+.hero {
+  padding: 80px 0 64px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: .35;
+  mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center; }
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  animation: pulse 2s infinite ease-in-out;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+.hero h1 {
+  font-size: clamp(56px, 7vw, 108px);
+  line-height: .92; letter-spacing: -.03em; font-weight: 600;
+  margin: 0 0 24px;
+}
+.hero h1 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero-sub { color: var(--fg-dim); font-size: 18px; max-width: 520px; text-wrap: pretty; }
+.hero-meta {
+  margin-top: 40px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+}
+.hero-meta > div { border-top: 1px solid var(--line-strong); padding-top: 10px; }
+.hero-meta label { color: var(--fg-mute); display: block; margin-bottom: 4px; }
+.hero-meta span { color: var(--fg); }
+
+.hero-mark-wrap {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 60%),
+    var(--bg-elev);
+  position: relative;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.hero-mark-wrap::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 79px, var(--line) 79px, var(--line) 80px);
+  opacity: .4;
+}
+.hero-mark-wrap svg { width: 62%; color: var(--fg); position: relative; z-index: 1; }
+.hero-corner {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .1em; color: var(--fg-mute);
+  text-transform: uppercase;
+  z-index: 2;
+}
+.hero-corner.tl { top: 12px; left: 12px; }
+.hero-corner.tr { top: 12px; right: 12px; }
+.hero-corner.bl { bottom: 12px; left: 12px; }
+.hero-corner.br { bottom: 12px; right: 12px; }
+
+/* ---------- section scaffolding ---------- */
+section.sec {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sec-head { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.sec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.sec-num b { color: var(--accent); font-weight: 500; }
+.sec-title {
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1; letter-spacing: -.02em; font-weight: 500;
+  margin: 0;
+  text-wrap: balance;
+}
+.sec-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--fg-dim); }
+.sec-lede { color: var(--fg-dim); font-size: 16px; text-wrap: pretty; }
+
+/* ---------- reusable bits ---------- */
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-mute); }
+.label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+
+/* ---------- logo section ---------- */
+.logo-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
+.logo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  aspect-ratio: 16/10;
+  display: grid; place-items: center;
+  position: relative;
+  padding: 40px;
+}
+.logo-card.tall { aspect-ratio: 4/5; }
+.logo-card.light { background: var(--fg); color: var(--bg); }
+.logo-card.light .logo-tag { color: var(--fg-mute); }
+.logo-card.accent { background: var(--accent); color: var(--accent-ink); }
+.logo-card.accent .logo-tag { color: color-mix(in srgb, var(--accent-ink) 60%, transparent); }
+.logo-card svg { width: 78%; max-height: 72%; color: currentColor; }
+.logo-card .mark-only { width: 50%; }
+.logo-tag {
+  position: absolute; top: 16px; left: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ---------- clearspace ---------- */
+.clearspace {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: stretch;
+}
+.clearspace-stage {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 60px;
+  position: relative;
+  aspect-ratio: 16/10;
+  display: grid; place-items: center;
+}
+.cs-svg { width: 80%; }
+.cs-box {
+  position: absolute;
+  inset: 60px;
+  border: 1px dashed var(--accent);
+  pointer-events: none;
+}
+.cs-labels { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.cs-labels.t { top: 40px; left: 50%; transform: translateX(-50%); }
+.cs-labels.l { top: 50%; left: 40px; transform: translateY(-50%) rotate(-90deg); }
+.cs-notes { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.cs-notes h4 { margin: 0; font-size: 18px; font-weight: 500; letter-spacing: -.01em; }
+.cs-notes p { margin: 0; color: var(--fg-dim); font-size: 14px; }
+
+/* ---------- don'ts ---------- */
+.donts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.dont {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.dont::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(45deg, transparent 48%, var(--warn) 48%, var(--warn) 52%, transparent 52%);
+  opacity: .5;
+}
+.dont svg { width: 62%; color: var(--fg); z-index: 1; }
+.dont-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--warn);
+  z-index: 2;
+}
+.dont.stretch svg { transform: scaleX(1.6); }
+.dont.squish svg { transform: scaleY(0.55); }
+.dont.tilt svg { transform: rotate(-12deg); }
+.dont.recolor svg { color: #7ea4ff; }
+
+/* ---------- color palette ---------- */
+.palette-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--line); }
+.swatch {
+  aspect-ratio: 3/4;
+  padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.swatch:last-child { border-right: 0; }
+.swatch .s-name { font-size: 20px; font-weight: 500; letter-spacing: -.01em; }
+.swatch .s-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.7; }
+.swatch .s-meta div { opacity: .7; }
+.swatch .s-meta div b { opacity: 1; font-weight: 500; }
+
+.palette-tokens {
+  margin-top: 24px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.token {
+  border: 1px solid var(--line);
+  padding: 16px;
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-card);
+}
+.token-chip { width: 36px; height: 36px; border: 1px solid var(--line-strong); flex-shrink: 0; }
+.token-info { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.token-info .tk-name { color: var(--fg); letter-spacing: .04em; }
+.token-info .tk-val { color: var(--fg-mute); letter-spacing: .04em; }
+
+/* ---------- type ---------- */
+.type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.type-card {
+  border: 1px solid var(--line);
+  padding: 32px;
+  background: var(--bg-card);
+  min-height: 260px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.type-card .sample { font-size: 72px; line-height: .9; letter-spacing: -.02em; font-weight: 500; }
+.type-card .sample.serif { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+.type-card .sample.mono { font-family: 'JetBrains Mono', monospace; font-size: 42px; letter-spacing: 0; font-weight: 500; }
+.type-card .meta { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; }
+.type-card .meta .fam { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-mute); }
+.type-card .meta .role { font-size: 13px; color: var(--fg-dim); }
+
+.type-scale { margin-top: 32px; border: 1px solid var(--line); }
+.type-scale-row {
+  display: grid; grid-template-columns: 140px 140px 1fr;
+  gap: 24px; padding: 20px 24px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+}
+.type-scale-row:last-child { border-bottom: 0; }
+.ts-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-dim); }
+.ts-spec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-mute); }
+.ts-preview { color: var(--fg); letter-spacing: -.01em; line-height: 1.05; font-weight: 500; }
+
+/* ---------- iconography ---------- */
+.icon-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.icon-cell {
+  aspect-ratio: 1;
+  background: var(--bg-card);
+  display: grid; place-items: center;
+  color: var(--fg);
+  position: relative;
+}
+.icon-cell svg { width: 44%; height: 44%; }
+.icon-cell .iname {
+  position: absolute; bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ---------- pattern library ---------- */
+.patterns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pattern {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.pattern-label {
+  position: absolute; top: 12px; left: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--fg-dim);
+  z-index: 2;
+}
+
+/* pattern: grid */
+.pattern.p-grid {
+  background:
+    linear-gradient(var(--line-strong) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--line-strong) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--bg-card);
+}
+.pattern.p-grid::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 70%, var(--accent) 0%, transparent 2%),
+              radial-gradient(circle at 70% 30%, var(--accent) 0%, transparent 1.5%);
+  mix-blend-mode: screen;
+}
+
+/* pattern: orbit */
+.pattern.p-orbit { background: var(--bg-elev); display: grid; place-items: center; }
+.pattern.p-orbit svg { width: 100%; height: 100%; }
+
+/* pattern: scan */
+.pattern.p-scan {
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 4px, var(--line) 4px, var(--line) 5px),
+    var(--bg-elev);
+  position: relative;
+}
+.pattern.p-scan::before {
+  content: 'TELEMETRY // OUTER.ORBIT // SIGNAL.OK';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .2em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ---------- voice ---------- */
+.voice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.voice-card {
+  border: 1px solid var(--line);
+  padding: 32px;
+  background: var(--bg-card);
+}
+.voice-card h4 { margin: 0 0 8px; font-size: 20px; font-weight: 500; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+.voice-card h4::before {
+  content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+}
+.voice-card p { margin: 0 0 16px; color: var(--fg-dim); font-size: 14px; }
+.voice-examples { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
+.voice-examples .ex { display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 8px 0; align-items: baseline; font-size: 14px; }
+.voice-examples .ex .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.voice-examples .ex.yes .tag { color: var(--ok); }
+.voice-examples .ex.no .tag { color: var(--warn); }
+.voice-examples .ex.no .txt { color: var(--fg-mute); text-decoration: line-through; text-decoration-color: var(--warn); text-decoration-thickness: 1px; }
+
+/* ---------- templates ---------- */
+.templates { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.tpl {
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+}
+.tpl-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.tpl-header .dim { color: var(--fg-mute); }
+.tpl-stage { padding: 24px; }
+
+/* business card */
+.bizcard {
+  aspect-ratio: 1.75;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  padding: 24px;
+  display: grid; grid-template-rows: auto 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+.bizcard .bc-top { display: flex; justify-content: space-between; align-items: center; }
+.bizcard .bc-mark { width: 28px; color: var(--fg); }
+.bizcard .bc-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+.bizcard .bc-name { font-size: 22px; font-weight: 500; letter-spacing: -.01em; }
+.bizcard .bc-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute); margin-top: 4px; }
+.bizcard .bc-bottom { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-dim); }
+.bizcard.back { background: var(--accent); }
+.bizcard.back .bc-wordmark { width: 68%; color: var(--accent-ink); align-self: end; }
+
+/* social avatar / cover */
+.avatar-row { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: start; }
+.avatar {
+  width: 140px; height: 140px;
+  background: var(--bg); border: 1px solid var(--line);
+  display: grid; place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.avatar svg { width: 55%; color: var(--fg); }
+.avatar.accent { background: var(--accent); }
+.avatar.accent svg { color: var(--accent-ink); }
+.cover {
+  aspect-ratio: 3/1;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32px;
+}
+.cover .c-left { display: flex; flex-direction: column; gap: 8px; }
+.cover .c-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+.cover .c-head { font-size: 40px; font-weight: 500; letter-spacing: -.02em; line-height: .95; }
+.cover .c-head em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--fg-dim); }
+.cover .c-mark { width: 180px; color: var(--fg); opacity: .25; }
+.cover::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 60px 60px; opacity: .5;
+}
+
+/* slide */
+.slide {
+  aspect-ratio: 16/9;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  position: relative;
+  padding: 40px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  overflow: hidden;
+}
+.slide-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px;
+  opacity: .4;
+  mask-image: radial-gradient(ellipse at 80% 20%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 80% 20%, #000 0%, transparent 70%);
+}
+.slide-top { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+.slide-top .mark { width: 22px; color: var(--fg); }
+.slide-main { position: relative; z-index: 1; }
+.slide-main .eye { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.slide-main .title { font-size: 48px; line-height: .95; font-weight: 500; letter-spacing: -.02em; max-width: 80%; }
+.slide-main .title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--fg-dim); }
+.slide-foot { position: relative; z-index: 1; display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+
+/* ---------- imagery direction ---------- */
+.imagery { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
+.img-tile {
+  aspect-ratio: 4/3;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  display: grid; place-items: center;
+  color: var(--fg-mute);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+}
+.img-tile.product { aspect-ratio: 8/5; background: var(--bg-card); }
+.img-tile.product::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(135deg, transparent 0, transparent 18px, var(--line) 18px, var(--line) 19px);
+  opacity: .7;
+}
+.img-tile.portrait::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, transparent 0, transparent 14px, var(--line) 14px, var(--line) 15px);
+  opacity: .7;
+}
+.img-tile .tag { position: relative; z-index: 1; background: var(--bg); padding: 8px 12px; border: 1px solid var(--line); }
+.img-tile.photo {
+  padding: 0;
+  background: var(--bg);
+}
+.img-tile.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-principles { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.img-principles > div { border-top: 1px solid var(--line-strong); padding-top: 14px; }
+.img-principles h5 { margin: 0 0 6px; font-size: 14px; font-weight: 500; }
+.img-principles p { margin: 0; color: var(--fg-dim); font-size: 13px; }
+
+/* ---------- sub-brands ---------- */
+.subs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.sub {
+  aspect-ratio: 5/3;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+}
+.sub-top { display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+.sub-top svg { width: 20px; color: var(--fg); }
+.sub-top .divider { width: 1px; height: 16px; background: var(--line-strong); }
+.sub-name { font-size: 32px; font-weight: 500; letter-spacing: -.02em; line-height: 1; }
+.sub-desc { font-size: 13px; color: var(--fg-dim); }
+
+/* ---------- footer ---------- */
+footer.foot {
+  padding: 80px 0 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  align-items: end;
+}
+.foot-mark { width: 48px; color: var(--fg); margin-bottom: 16px; }
+.foot-title { font-size: 24px; font-weight: 500; letter-spacing: -.01em; max-width: 400px; }
+.foot-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute); text-align: right; line-height: 2; }
+
+/* responsive */
+@media (max-width: 960px) {
+  .page { padding: 0 20px 80px; }
+  .topbar-inner { padding: 12px 20px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .sec-head { grid-template-columns: 1fr; gap: 16px; }
+  .logo-grid { grid-template-columns: 1fr; }
+  .clearspace { grid-template-columns: 1fr; }
+  .donts { grid-template-columns: repeat(2, 1fr); }
+  .palette-row { grid-template-columns: repeat(2, 1fr); }
+  .swatch { border-right: 0; border-bottom: 1px solid var(--line); }
+  .type-grid { grid-template-columns: 1fr; }
+  .icon-grid { grid-template-columns: repeat(4, 1fr); }
+  .patterns { grid-template-columns: 1fr; }
+  .voice-grid, .templates, .imagery, .subs { grid-template-columns: 1fr; }
+  .type-scale-row { grid-template-columns: 1fr; }
+  .hero-meta { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-theme="mission-control">
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <svg class="topbar-mark" viewBox="179 -30 260 260" fill="currentColor">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+      <div class="topbar-title">Outer Orbit · <b>Brand Guidelines v1.0</b></div>
+    </div>
+    <div class="topbar-right">
+      <a class="topbar-link" href="Outer Orbit Design System.html">Design System →</a>
+      <span class="topbar-badge">v1.0 · Locked</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span class="theme-label">Direction · Mission Control</span></div>
+      <h1>A brand for <em>everything you launch next.</em></h1>
+      <p class="hero-sub">Outer Orbit is the secret identity — a flexible, engineering-grade system that makes a one-person studio feel like a small constellation. Consultancy, apparel, side projects, sub-brands. All orbiting the same mark.</p>
+      <div class="hero-meta">
+        <div><label>For</label><span>Devon Wallace</span></div>
+        <div><label>Origin</label><span>Outer Orbit Creative</span></div>
+        <div><label>Scope</label><span>Parent brand + sub-brands</span></div>
+      </div>
+    </div>
+    <div class="hero-mark-wrap">
+      <span class="hero-corner tl">[ 01 // MARK ]</span>
+      <span class="hero-corner tr">R=1.000</span>
+      <span class="hero-corner bl">LAT 43.65° N</span>
+      <span class="hero-corner br">LON 79.38° W</span>
+      <svg viewBox="179 -30 260 260" fill="currentColor">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 LOGO ============ -->
+<section class="sec" id="logo">
+  <div class="sec-head">
+    <div class="sec-num"><b>01</b> / Logo</div>
+    <h2 class="sec-title">The mark is <em>the anchor.</em></h2>
+    <p class="sec-lede">Three orbital bands contained in a circle — a satellite, an atom, a compass. Works embroidered, etched, screen-printed, or in a terminal. Always keeps its geometry.</p>
+  </div>
+
+  <div class="logo-grid">
+    <div class="logo-card" style="aspect-ratio:16/9;">
+      <span class="logo-tag">A · Primary · Lockup</span>
+      <svg viewBox="0 0 595.96 307.96" fill="currentColor"><g>
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+        <path d="M61.81,236.98v32.85c0,10.14-5.29,15.34-15.69,15.34h-19.5c-10.4,0-15.69-5.2-15.69-15.34v-32.85c0-10.14,5.29-15.34,15.69-15.34h19.5c10.4,0,15.69,5.2,15.69,15.34ZM41.44,234.9h-10.14c-3.55,0-4.77,1.13-4.77,4.6v27.83c0,3.38,1.21,4.59,4.77,4.59h10.14c3.55,0,4.77-1.21,4.77-4.59v-27.83c0-3.47-1.22-4.6-4.77-4.6Z"/>
+        <path d="M104.22,285.17h-18.55c-10.4,0-15.69-5.2-15.69-15.34v-47.33h15.6v44.82c0,3.38,1.21,4.59,4.77,4.59h9.19c3.55,0,4.77-1.21,4.77-4.59v-44.82h15.6v47.33c0,10.14-5.29,15.34-15.69,15.34Z"/>
+        <path d="M145.67,235.76h-17.6v-13.26h50.8v13.26h-17.6v48.54h-15.6v-48.54Z"/>
+        <path d="M202.22,235.76v10.32h24.62v13.26h-24.62v11.7h28.26v13.26h-43.86v-61.81h43.86v13.26h-28.26Z"/>
+        <path d="M238.79,222.5h33.55c10.49,0,15.78,5.2,15.78,15.34v9.27c0,7.63-2.95,12.4-8.93,14.3l15.6,22.89h-18.2l-15.08-21.93h-7.11v21.93h-15.6v-61.81ZM267.66,249.11c3.64,0,4.85-1.13,4.85-4.51v-4.25c0-3.47-1.21-4.59-4.85-4.59h-13.26v13.35h13.26Z"/>
+        <path d="M374.67,236.98v32.85c0,10.14-5.29,15.34-15.69,15.34h-19.5c-10.4,0-15.69-5.2-15.69-15.34v-32.85c0-10.14,5.29-15.34,15.69-15.34h19.5c10.4,0,15.69,5.2,15.69,15.34ZM354.3,234.9h-10.14c-3.55,0-4.77,1.13-4.77,4.6v27.83c0,3.38,1.21,4.59,4.77,4.59h10.14c3.55,0,4.77-1.21,4.77-4.59v-27.83c0-3.47-1.22-4.6-4.77-4.6Z"/>
+        <path d="M383.88,222.5h33.55c10.49,0,15.78,5.2,15.78,15.34v9.27c0,7.63-2.95,12.4-8.93,14.3l15.6,22.89h-18.2l-15.08-21.93h-7.11v21.93h-15.6v-61.81ZM412.74,249.11c3.64,0,4.85-1.13,4.85-4.51v-4.25c0-3.47-1.21-4.59-4.85-4.59h-13.26v13.35h13.26Z"/>
+        <path d="M445.81,222.5h32.51c10.4,0,15.78,5.2,15.78,15.34v3.55c0,4.59-1.65,7.71-5.98,10.49,5.29,2.34,7.28,5.98,7.28,12.22v4.85c0,10.14-5.37,15.34-15.69,15.34h-33.89v-61.81ZM473.64,246.51c3.64,0,4.85-1.04,4.85-4.42v-1.99c0-3.38-1.21-4.51-4.85-4.51h-12.22v10.92h12.22ZM474.94,259.43h-13.52v11.79h13.52c3.64,0,4.85-1.13,4.85-4.59v-2.6c0-3.47-1.21-4.59-4.85-4.59Z"/>
+        <path d="M504.45,222.5h15.6v61.81h-15.6v-61.81Z"/>
+        <path d="M546.93,235.77h-19.71v-13.26h56.9v13.26h-19.71v48.54h-17.48v-48.54Z"/>
+      </g></svg>
+    </div>
+    <div class="logo-card tall">
+      <span class="logo-tag">B · Mark only</span>
+      <svg class="mark-only" viewBox="179 -30 260 260" fill="currentColor">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+    </div>
+    <div class="logo-card tall accent">
+      <span class="logo-tag">C · Inverse on accent</span>
+      <svg class="mark-only" viewBox="179 -30 260 260" fill="currentColor">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- clearspace -->
+  <div style="margin-top: 48px;">
+    <div class="label" style="margin-bottom: 16px;">Clearspace · Minimum size</div>
+    <div class="clearspace">
+      <div class="clearspace-stage">
+        <div class="cs-box"></div>
+        <span class="cs-labels t">= X</span>
+        <span class="cs-labels l">= X</span>
+        <svg class="cs-svg" viewBox="0 0 595.96 307.96" fill="currentColor"><g>
+          <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+          <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+          <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+          <path d="M61.81,236.98v32.85c0,10.14-5.29,15.34-15.69,15.34h-19.5c-10.4,0-15.69-5.2-15.69-15.34v-32.85c0-10.14,5.29-15.34,15.69-15.34h19.5c10.4,0,15.69,5.2,15.69,15.34ZM41.44,234.9h-10.14c-3.55,0-4.77,1.13-4.77,4.6v27.83c0,3.38,1.21,4.59,4.77,4.59h10.14c3.55,0,4.77-1.21,4.77-4.59v-27.83c0-3.47-1.22-4.6-4.77-4.6Z"/>
+          <path d="M104.22,285.17h-18.55c-10.4,0-15.69-5.2-15.69-15.34v-47.33h15.6v44.82c0,3.38,1.21,4.59,4.77,4.59h9.19c3.55,0,4.77-1.21,4.77-4.59v-44.82h15.6v47.33c0,10.14-5.29,15.34-15.69,15.34Z"/>
+          <path d="M145.67,235.76h-17.6v-13.26h50.8v13.26h-17.6v48.54h-15.6v-48.54Z"/>
+          <path d="M202.22,235.76v10.32h24.62v13.26h-24.62v11.7h28.26v13.26h-43.86v-61.81h43.86v13.26h-28.26Z"/>
+          <path d="M238.79,222.5h33.55c10.49,0,15.78,5.2,15.78,15.34v9.27c0,7.63-2.95,12.4-8.93,14.3l15.6,22.89h-18.2l-15.08-21.93h-7.11v21.93h-15.6v-61.81ZM267.66,249.11c3.64,0,4.85-1.13,4.85-4.51v-4.25c0-3.47-1.21-4.59-4.85-4.59h-13.26v13.35h13.26Z"/>
+          <path d="M374.67,236.98v32.85c0,10.14-5.29,15.34-15.69,15.34h-19.5c-10.4,0-15.69-5.2-15.69-15.34v-32.85c0-10.14,5.29-15.34,15.69-15.34h19.5c10.4,0,15.69,5.2,15.69,15.34ZM354.3,234.9h-10.14c-3.55,0-4.77,1.13-4.77,4.6v27.83c0,3.38,1.21,4.59,4.77,4.59h10.14c3.55,0,4.77-1.21,4.77-4.59v-27.83c0-3.47-1.22-4.6-4.77-4.6Z"/>
+          <path d="M383.88,222.5h33.55c10.49,0,15.78,5.2,15.78,15.34v9.27c0,7.63-2.95,12.4-8.93,14.3l15.6,22.89h-18.2l-15.08-21.93h-7.11v21.93h-15.6v-61.81ZM412.74,249.11c3.64,0,4.85-1.13,4.85-4.51v-4.25c0-3.47-1.21-4.59-4.85-4.59h-13.26v13.35h13.26Z"/>
+          <path d="M445.81,222.5h32.51c10.4,0,15.78,5.2,15.78,15.34v3.55c0,4.59-1.65,7.71-5.98,10.49,5.29,2.34,7.28,5.98,7.28,12.22v4.85c0,10.14-5.37,15.34-15.69,15.34h-33.89v-61.81ZM473.64,246.51c3.64,0,4.85-1.04,4.85-4.42v-1.99c0-3.38-1.21-4.51-4.85-4.51h-12.22v10.92h12.22ZM474.94,259.43h-13.52v11.79h13.52c3.64,0,4.85-1.13,4.85-4.59v-2.6c0-3.47-1.21-4.59-4.85-4.59Z"/>
+          <path d="M504.45,222.5h15.6v61.81h-15.6v-61.81Z"/>
+          <path d="M546.93,235.77h-19.71v-13.26h56.9v13.26h-19.71v48.54h-17.48v-48.54Z"/>
+        </g></svg>
+      </div>
+      <div class="cs-notes card">
+        <div>
+          <div class="label" style="margin-bottom: 8px;">Clearspace</div>
+          <h4>Minimum <em style="font-family:'Instrument Serif',serif; font-style: italic; color: var(--fg-dim); font-weight: 400;">X</em> = height of the 'O' in wordmark.</h4>
+          <p>Keep X of clearspace on all sides. Double it on merchandise, embroidery, and wherever the mark is the only graphic on a surface.</p>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom: 8px;">Minimum sizes</div>
+          <h4 style="font-size: 16px;">Digital: 120px wide (full lockup) · 24px (mark)</h4>
+          <p style="margin-top: 8px;">Print: 0.75" wide (full lockup) · 0.25" (mark). Below these sizes, use the mark alone.</p>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom: 8px;">Embroidery + etch</div>
+          <p>Mark stitches cleanly at 2" or larger. For puffed embroidery, bump line weight by +15%. The mark is approved for single-color metal etch, silicone, debossing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- don'ts -->
+  <div style="margin-top: 48px;">
+    <div class="label" style="margin-bottom: 16px;">Don'ts · Never do this</div>
+    <div class="donts">
+      <div class="dont stretch">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/></svg>
+        <div class="dont-caption">Don't stretch</div>
+      </div>
+      <div class="dont squish">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/></svg>
+        <div class="dont-caption">Don't squish</div>
+      </div>
+      <div class="dont tilt">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/></svg>
+        <div class="dont-caption">Don't rotate</div>
+      </div>
+      <div class="dont recolor">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/></svg>
+        <div class="dont-caption">Don't recolor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 COLOR ============ -->
+<section class="sec" id="color">
+  <div class="sec-head">
+    <div class="sec-num"><b>02</b> / Color</div>
+    <h2 class="sec-title">Mostly <em>ink and vacuum.</em> One signal.</h2>
+    <p class="sec-lede theme-copy-color">Near-black is the default. Whites are neutral-cool so the system reads like chromed hardware. The accent is steel blue — one industrial signal used like a painted machine surface or a navigation light.</p>
+  </div>
+
+  <!-- Palette row: 5 swatches -->
+  <div class="palette-row" id="palette-row">
+    <!-- filled by JS for dynamic theme values -->
+  </div>
+
+  <div class="palette-tokens" id="palette-tokens"></div>
+</section>
+
+<!-- ============ 03 TYPE ============ -->
+<section class="sec" id="type">
+  <div class="sec-head">
+    <div class="sec-num"><b>03</b> / Typography</div>
+    <h2 class="sec-title">Geometric sans, with a <em>whisper of serif.</em></h2>
+    <p class="sec-lede">Space Grotesk does the talking. JetBrains Mono adds the engineering texture. Instrument Serif appears in italics as a quiet accent — never as a body face. Most of the brand is set in one of two weights.</p>
+  </div>
+
+  <div class="type-grid">
+    <div class="type-card">
+      <div class="sample">Aa</div>
+      <div class="meta"><span class="fam">Space Grotesk · 500</span><span class="role">Display + UI</span></div>
+    </div>
+    <div class="type-card">
+      <div class="sample serif">Aa</div>
+      <div class="meta"><span class="fam">Instrument Serif · Italic</span><span class="role">Accent only</span></div>
+    </div>
+    <div class="type-card">
+      <div class="sample mono">A.01</div>
+      <div class="meta"><span class="fam">JetBrains Mono · 500</span><span class="role">Telemetry + meta</span></div>
+    </div>
+  </div>
+
+  <div class="type-scale">
+    <div class="type-scale-row"><div class="ts-name">Display / XL</div><div class="ts-spec">96 / 0.92 / -0.03em</div><div class="ts-preview" style="font-size:72px;">Launch things into orbit.</div></div>
+    <div class="type-scale-row"><div class="ts-name">Display / L</div><div class="ts-spec">64 / 0.95 / -0.02em</div><div class="ts-preview" style="font-size:52px;">A studio, a signal, a system.</div></div>
+    <div class="type-scale-row"><div class="ts-name">Heading / L</div><div class="ts-spec">40 / 1.05 / -0.02em</div><div class="ts-preview" style="font-size:36px;">AI consulting, done quietly.</div></div>
+    <div class="type-scale-row"><div class="ts-name">Heading / M</div><div class="ts-spec">24 / 1.2 / -0.01em</div><div class="ts-preview" style="font-size:22px;">A small constellation of projects.</div></div>
+    <div class="type-scale-row"><div class="ts-name">Body</div><div class="ts-spec">16 / 1.5</div><div class="ts-preview" style="font-size:15px; font-weight:400; color:var(--fg-dim);">A catch-all for the work, a consistent face for the client.</div></div>
+    <div class="type-scale-row"><div class="ts-name">Meta / Mono</div><div class="ts-spec">11 / 1.5 / 0.14em / UPPER</div><div class="ts-preview" style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--fg);">SYS · OUTER.ORBIT // V0.1</div></div>
+  </div>
+</section>
+
+<!-- ============ 04 ICONS ============ -->
+<section class="sec" id="icons">
+  <div class="sec-head">
+    <div class="sec-num"><b>04</b> / Iconography</div>
+    <h2 class="sec-title">Line icons, <em>engineered not drawn.</em></h2>
+    <p class="sec-lede">1.5px stroke, round caps, round joins, 24px grid. Always two-state (outline as default, filled for active). No gradients, no shadows, no soft fills.</p>
+  </div>
+
+  <div class="icon-grid">
+    <!-- 16 icons: procedurally simple line marks on a 24 grid -->
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4"/></svg><span class="iname">orbit</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg><span class="iname">target</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg><span class="iname">system</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 10h16M10 4v16"/></svg><span class="iname">frame</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L12 4 L20 20 Z"/><path d="M8 14h8"/></svg><span class="iname">launch</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="iname">signal</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M7 5v14M3 9h4"/></svg><span class="iname">archive</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg><span class="iname">ai</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16l6-4 6 4V4z"/></svg><span class="iname">mission</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6l2-3 2 6 2-3h4"/></svg><span class="iname">pulse</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 L12 5 L19 19"/><circle cx="12" cy="14" r="2"/></svg><span class="iname">build</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><span class="iname">track</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9l8 6 8-6"/></svg><span class="iname">relay</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-4 8-8 9-4-1-8-4-8-9V7z"/></svg><span class="iname">trust</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h12v4H6zM6 14h12v4H6z"/><circle cx="9" cy="8" r=".5"/><circle cx="9" cy="16" r=".5"/></svg><span class="iname">stack</span></div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/><path d="M12 7v10M7 12h10"/></svg><span class="iname">node</span></div>
+  </div>
+</section>
+
+<!-- ============ 05 PATTERNS ============ -->
+<section class="sec" id="patterns">
+  <div class="sec-head">
+    <div class="sec-num"><b>05</b> / Pattern library</div>
+    <h2 class="sec-title">Three textures, <em>endlessly remixable.</em></h2>
+    <p class="sec-lede">Grid, orbit, scan. Use patterns as background texture — never as the subject. Layer at 20–40% opacity behind content; full strength only in empty backdrops (decks, covers, hero).</p>
+  </div>
+
+  <div class="patterns">
+    <div class="pattern p-grid">
+      <span class="pattern-label">01 · Grid</span>
+    </div>
+    <div class="pattern p-orbit">
+      <span class="pattern-label">02 · Orbit</span>
+      <svg viewBox="0 0 200 200">
+        <g fill="none" stroke="currentColor" stroke-width="0.5" style="color: var(--line-strong);">
+          <circle cx="100" cy="100" r="20"/>
+          <ellipse cx="100" cy="100" rx="40" ry="15" transform="rotate(20 100 100)"/>
+          <ellipse cx="100" cy="100" rx="60" ry="22" transform="rotate(-10 100 100)"/>
+          <ellipse cx="100" cy="100" rx="80" ry="30" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="100" rx="95" ry="35" transform="rotate(-30 100 100)"/>
+        </g>
+        <g style="color: var(--accent);">
+          <circle cx="100" cy="100" r="2" fill="currentColor"/>
+          <circle cx="160" cy="88" r="1.5" fill="currentColor"/>
+          <circle cx="40" cy="130" r="1" fill="currentColor"/>
+        </g>
+      </svg>
+    </div>
+    <div class="pattern p-scan">
+      <span class="pattern-label">03 · Scan</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 IMAGERY ============ -->
+<section class="sec" id="imagery">
+  <div class="sec-head">
+    <div class="sec-num"><b>06</b> / Imagery direction</div>
+    <h2 class="sec-title">Hardware-grade <em>product &amp; studio.</em></h2>
+    <p class="sec-lede">Controlled light, charcoal surfaces, honest materials. Photography looks more like a product shoot than a lifestyle reel — even when it's a person. Workshop over studio.</p>
+  </div>
+
+  <div class="imagery">
+    <div class="img-tile product photo"><img src="assets/hat-mono.png" alt="Outer Orbit flat brim cap, black on concrete"></div>
+    <div class="img-tile portrait"><span class="tag">Portrait · B&amp;W · Hard light</span></div>
+    <div class="img-tile product"><span class="tag">Product · Hero · Grey concrete</span></div>
+  </div>
+
+  <div class="img-principles">
+    <div><h5>Surface over subject.</h5><p>Let the material tell the story — concrete, brushed metal, raw canvas. Subjects live in the scene, never staged against it.</p></div>
+    <div><h5>One light source.</h5><p>Directional, controlled. No flat lighting, no ring lights, no color gels. Shadows are part of the composition.</p></div>
+    <div><h5>Never AI art as deliverable.</h5><p>Use AI freely in process, reference, and mockups. Final brand imagery is photographed or drafted; always captioned when generated.</p></div>
+  </div>
+</section>
+
+<!-- ============ 07 VOICE ============ -->
+<section class="sec" id="voice">
+  <div class="sec-head">
+    <div class="sec-num"><b>07</b> / Voice &amp; tone</div>
+    <h2 class="sec-title">Confident. Dry. <em>Slightly understated.</em></h2>
+    <p class="sec-lede">Write like an engineer who used to be in a band. Short sentences. Specific verbs. Low on adjectives. Never cosmic mysticism — Outer Orbit is the vehicle, not the destination.</p>
+  </div>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <h4>Principles</h4>
+      <p>Plain English over jargon. If a word sounds like a pitch deck, cut it.</p>
+      <p>Specifics over superlatives. "Cut onboarding to 4 steps" beats "transformed the experience."</p>
+      <p>Dry humor is allowed — one joke per page, max.</p>
+      <p>Lowercase in product UI. Title Case in headlines. UPPERCASE only in mono/meta.</p>
+    </div>
+    <div class="voice-card">
+      <h4>Tagline candidates</h4>
+      <div class="voice-examples">
+        <div class="ex yes"><span class="tag">A</span><span class="txt">A studio in orbit around everything you ship next.</span></div>
+        <div class="ex yes"><span class="tag">B</span><span class="txt">Design, systems &amp; AI — from one small constellation.</span></div>
+        <div class="ex yes"><span class="tag">C</span><span class="txt">The quiet operator behind loud work.</span></div>
+        <div class="ex yes"><span class="tag">D</span><span class="txt">Powered by Outer Orbit.</span></div>
+        <div class="ex no"><span class="tag">×</span><span class="txt">Journey to the stars of your business!</span></div>
+        <div class="ex no"><span class="tag">×</span><span class="txt">Unlocking AI transformation, at the speed of light.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 TEMPLATES ============ -->
+<section class="sec" id="templates">
+  <div class="sec-head">
+    <div class="sec-num"><b>08</b> / Templates</div>
+    <h2 class="sec-title">The system, <em>wearing real clothes.</em></h2>
+    <p class="sec-lede">Quick previews of the identity on the surfaces you'll actually use: business card, avatar, social cover, pitch slide. Every template is built from the same tokens.</p>
+  </div>
+
+  <!-- biz card -->
+  <div class="templates">
+    <div class="tpl">
+      <div class="tpl-header"><span>01 · Business card · Front</span><span class="dim">3.5 × 2.0 in</span></div>
+      <div class="tpl-stage">
+        <div class="bizcard">
+          <div class="bc-top">
+            <svg class="bc-mark" viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+            <span class="bc-tag">// SIG-01</span>
+          </div>
+          <div>
+            <div class="bc-name">Devon Wallace</div>
+            <div class="bc-role">Founder · Outer Orbit</div>
+          </div>
+          <div class="bc-bottom">
+            <span>devon@outerorbit.ca</span>
+            <span>outerorbit.ca</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tpl">
+      <div class="tpl-header"><span>02 · Business card · Back</span><span class="dim">3.5 × 2.0 in</span></div>
+      <div class="tpl-stage">
+        <div class="bizcard back">
+          <div></div>
+          <svg class="bc-wordmark" viewBox="0 215 600 75" fill="currentColor">
+            <path d="M61.81,236.98v32.85c0,10.14-5.29,15.34-15.69,15.34h-19.5c-10.4,0-15.69-5.2-15.69-15.34v-32.85c0-10.14,5.29-15.34,15.69-15.34h19.5c10.4,0,15.69,5.2,15.69,15.34ZM41.44,234.9h-10.14c-3.55,0-4.77,1.13-4.77,4.6v27.83c0,3.38,1.21,4.59,4.77,4.59h10.14c3.55,0,4.77-1.21,4.77-4.59v-27.83c0-3.47-1.22-4.6-4.77-4.6Z"/>
+            <path d="M104.22,285.17h-18.55c-10.4,0-15.69-5.2-15.69-15.34v-47.33h15.6v44.82c0,3.38,1.21,4.59,4.77,4.59h9.19c3.55,0,4.77-1.21,4.77-4.59v-44.82h15.6v47.33c0,10.14-5.29,15.34-15.69,15.34Z"/>
+            <path d="M145.67,235.76h-17.6v-13.26h50.8v13.26h-17.6v48.54h-15.6v-48.54Z"/>
+            <path d="M202.22,235.76v10.32h24.62v13.26h-24.62v11.7h28.26v13.26h-43.86v-61.81h43.86v13.26h-28.26Z"/>
+            <path d="M238.79,222.5h33.55c10.49,0,15.78,5.2,15.78,15.34v9.27c0,7.63-2.95,12.4-8.93,14.3l15.6,22.89h-18.2l-15.08-21.93h-7.11v21.93h-15.6v-61.81ZM267.66,249.11c3.64,0,4.85-1.13,4.85-4.51v-4.25c0-3.47-1.21-4.59-4.85-4.59h-13.26v13.35h13.26Z"/>
+            <path d="M374.67,236.98v32.85c0,10.14-5.29,15.34-15.69,15.34h-19.5c-10.4,0-15.69-5.2-15.69-15.34v-32.85c0-10.14,5.29-15.34,15.69-15.34h19.5c10.4,0,15.69,5.2,15.69,15.34ZM354.3,234.9h-10.14c-3.55,0-4.77,1.13-4.77,4.6v27.83c0,3.38,1.21,4.59,4.77,4.59h10.14c3.55,0,4.77-1.21,4.77-4.59v-27.83c0-3.47-1.22-4.6-4.77-4.6Z"/>
+            <path d="M383.88,222.5h33.55c10.49,0,15.78,5.2,15.78,15.34v9.27c0,7.63-2.95,12.4-8.93,14.3l15.6,22.89h-18.2l-15.08-21.93h-7.11v21.93h-15.6v-61.81ZM412.74,249.11c3.64,0,4.85-1.13,4.85-4.51v-4.25c0-3.47-1.21-4.59-4.85-4.59h-13.26v13.35h13.26Z"/>
+            <path d="M445.81,222.5h32.51c10.4,0,15.78,5.2,15.78,15.34v3.55c0,4.59-1.65,7.71-5.98,10.49,5.29,2.34,7.28,5.98,7.28,12.22v4.85c0,10.14-5.37,15.34-15.69,15.34h-33.89v-61.81ZM473.64,246.51c3.64,0,4.85-1.04,4.85-4.42v-1.99c0-3.38-1.21-4.51-4.85-4.51h-12.22v10.92h12.22ZM474.94,259.43h-13.52v11.79h13.52c3.64,0,4.85-1.13,4.85-4.59v-2.6c0-3.47-1.21-4.59-4.85-4.59Z"/>
+            <path d="M504.45,222.5h15.6v61.81h-15.6v-61.81Z"/>
+            <path d="M546.93,235.77h-19.71v-13.26h56.9v13.26h-19.71v48.54h-17.48v-48.54Z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- social -->
+  <div style="margin-top: 24px;" class="tpl">
+    <div class="tpl-header"><span>03 · Social avatar &amp; cover</span><span class="dim">400 × 400 / 1500 × 500</span></div>
+    <div class="tpl-stage">
+      <div class="avatar-row">
+        <div class="avatar accent">
+          <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+        <div class="cover">
+          <div class="c-left">
+            <span class="c-eyebrow">// LinkedIn banner · v0.1</span>
+            <div class="c-head">Design, systems &amp;<br><em>AI consulting.</em></div>
+          </div>
+          <svg class="c-mark" viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- slide -->
+  <div style="margin-top: 24px;" class="tpl">
+    <div class="tpl-header"><span>04 · Pitch deck · Title slide</span><span class="dim">1920 × 1080</span></div>
+    <div class="tpl-stage">
+      <div class="slide">
+        <div class="slide-bg"></div>
+        <div class="slide-top">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <svg class="mark" viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+            <span>Outer Orbit</span>
+          </div>
+          <span>01 / 12</span>
+        </div>
+        <div class="slide-main">
+          <div class="eye">// AI CONSULTING · PROPOSAL 26Q2</div>
+          <div class="title">A small constellation of<br><em>practical AI adoption</em> for SMB teams.</div>
+        </div>
+        <div class="slide-foot">
+          <span>Prepared for · Client Co.</span>
+          <span>21 · APR · 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 SUB-BRANDS ============ -->
+<section class="sec" id="subs">
+  <div class="sec-head">
+    <div class="sec-num"><b>09</b> / Sub-brands</div>
+    <h2 class="sec-title">Each project orbits the <em>same mark.</em></h2>
+    <p class="sec-lede">Sub-brands borrow the system but keep their own typographic identity. The Outer Orbit mark anchors them; a divider + lockup connects parent and child. "Powered by Outer Orbit" is reserved for merch tags and footers.</p>
+  </div>
+
+  <div class="subs">
+    <div class="sub">
+      <div class="sub-top">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        <div class="divider"></div>
+        <span>Parent</span>
+      </div>
+      <div>
+        <div class="sub-name">Outer Orbit</div>
+        <div class="sub-desc" style="margin-top:6px;">Studio + consulting. Holding brand for everything below.</div>
+      </div>
+    </div>
+    <div class="sub">
+      <div class="sub-top">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        <div class="divider"></div>
+        <span>OO·01</span>
+      </div>
+      <div>
+        <div class="sub-name">Volunteer Hub</div>
+        <div class="sub-desc" style="margin-top:6px;">Ownable mark, OO-typography, distinct accent. Footer reads "An Outer Orbit build."</div>
+      </div>
+    </div>
+    <div class="sub">
+      <div class="sub-top">
+        <svg viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        <div class="divider"></div>
+        <span>OO·02</span>
+      </div>
+      <div>
+        <div class="sub-name">Orbit Academy</div>
+        <div class="sub-desc" style="margin-top:6px;">Learning sub-brand. Same tokens, warmer accent permitted. Reads "Part of Outer Orbit."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div>
+    <svg class="foot-mark" viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+    <div class="foot-title">Outer Orbit · Brand Identity System</div>
+    <div style="color: var(--fg-dim); font-size: 14px; margin-top: 8px; max-width: 480px;">A living document. Use the toggle up top to compare directions. When one wins, we'll lock tokens, draw real guidelines, and scaffold the website.</div>
+  </div>
+  <div class="foot-meta">
+    Devon Wallace<br>
+    Outer Orbit · v1.0<br>
+    21 · APR · 2026
+  </div>
+</footer>
+
+</div><!-- /.page -->
+
+<!-- ============ THEMING SCRIPT ============ -->
+<script>
+(() => {
+  const THEMES = {
+    'mission-control': {
+      name: 'Mission Control',
+      eyebrow: 'Outer Orbit · v1.0',
+      copy: {
+        color: 'Near-black is the default. Whites are neutral-cool so the system reads like chromed hardware. The accent is steel blue — one industrial signal used like a painted machine surface or a navigation light.'
+      },
+      swatches: [
+        { name: 'Vacuum',   token: '--bg',         hex: '#0B0D10', meta: ['CMYK 78 66 54 65', 'Role · Primary ground'] },
+        { name: 'Hull',     token: '--bg-card',    hex: '#16191E', meta: ['CMYK 72 63 54 48', 'Role · Elevation'] },
+        { name: 'Static',   token: '--fg-mute',    hex: '#6B7280', meta: ['CMYK 55 45 38 14', 'Role · Muted text'] },
+        { name: 'Bone',     token: '--fg',         hex: '#F2F3F5', meta: ['CMYK 2 1 1 0', 'Role · Primary text'] },
+        { name: 'Steel',    token: '--accent',     hex: '#3B7BC7', meta: ['CMYK 70 40 0 22', 'Role · Accent · Use sparingly'] },
+      ],
+      tokens: [
+        { name: '--bg',         val: '#0B0D10' },
+        { name: '--bg-elev',    val: '#121418' },
+        { name: '--bg-card',    val: '#16191E' },
+        { name: '--line',       val: '#23272E' },
+        { name: '--line-strong',val: '#2F343C' },
+        { name: '--fg',         val: '#F2F3F5' },
+        { name: '--fg-dim',     val: '#A5ABB5' },
+        { name: '--fg-mute',    val: '#6B7280' },
+        { name: '--accent',     val: '#3B7BC7' },
+      ],
+    },
+  };
+
+  const body = document.body;
+  const buttons = document.querySelectorAll('.switch button');
+  const themeLabel = document.querySelector('.theme-label');
+  const copyColor = document.querySelector('.theme-copy-color');
+  const paletteRow = document.getElementById('palette-row');
+  const paletteTokens = document.getElementById('palette-tokens');
+
+  function render(key) {
+    const t = THEMES[key];
+    body.dataset.theme = key;
+    localStorage.setItem('oo-theme', key);
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.theme === key));
+    if (themeLabel) themeLabel.textContent = t.eyebrow;
+    if (copyColor) copyColor.textContent = t.copy.color;
+
+    // palette
+    paletteRow.innerHTML = t.swatches.map(s => {
+      const isLight = ['Bone','Ignition'].includes(s.name);
+      const fg = isLight ? '#0A0907' : '#F2EADB';
+      return `
+        <div class="swatch" style="background:${s.hex}; color:${fg};">
+          <div class="s-meta" style="opacity:.7;">${s.token}</div>
+          <div>
+            <div class="s-name">${s.name}</div>
+            <div class="s-meta" style="margin-top: 10px;">
+              <div><b>${s.hex}</b></div>
+              ${s.meta.map(m => `<div>${m}</div>`).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // tokens
+    paletteTokens.innerHTML = t.tokens.map(tk => `
+      <div class="token">
+        <div class="token-chip" style="background:${tk.val};"></div>
+        <div class="token-info">
+          <div class="tk-name">${tk.name}</div>
+          <div class="tk-val">${tk.val}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => render(b.dataset.theme)));
+
+  const saved = localStorage.getItem('oo-theme');
+  render(saved && THEMES[saved] ? saved : 'mission-control');
+})();
+</script>
+
+</body>
+</html>
