@@ -34,7 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
   font-size: 15px;
   line-height: 1.5;
-  transition: background .3s ease, color .3s ease;
 }
 
 /* ---------- layout ---------- */
@@ -61,27 +60,6 @@ body {
 .topbar-mark { width: 28px; height: 28px; color: var(--fg); }
 .topbar-title { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-dim); font-family: 'JetBrains Mono', monospace; }
 .topbar-title b { color: var(--fg); font-weight: 500; }
-
-.switch {
-  display: inline-flex; align-items: stretch;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 3px;
-  background: var(--bg-elev);
-}
-.switch button {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-  padding: 8px 16px;
-  border: 0; background: transparent; color: var(--fg-dim);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all .2s ease;
-}
-.switch button.active {
-  background: var(--accent); color: var(--accent-ink);
-}
-.switch button:not(.active):hover { color: var(--fg); }
 
 
 .topbar-right { display: flex; align-items: center; gap: 16px; }
@@ -652,7 +630,7 @@ footer.foot {
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow"><span class="theme-label">Direction · Mission Control</span></div>
+      <div class="hero-eyebrow">Outer Orbit · v1.0</div>
       <h1>A brand for <em>everything you launch next.</em></h1>
       <p class="hero-sub">Outer Orbit is the secret identity — a flexible, engineering-grade system that makes a one-person studio feel like a small constellation. Consultancy, apparel, side projects, sub-brands. All orbiting the same mark.</p>
       <div class="hero-meta">
@@ -1097,7 +1075,7 @@ footer.foot {
   <div>
     <svg class="foot-mark" viewBox="179 -30 260 260" fill="currentColor"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
     <div class="foot-title">Outer Orbit · Brand Identity System</div>
-    <div style="color: var(--fg-dim); font-size: 14px; margin-top: 8px; max-width: 480px;">A living document. Use the toggle up top to compare directions. When one wins, we'll lock tokens, draw real guidelines, and scaffold the website.</div>
+    <div style="color: var(--fg-dim); font-size: 14px; margin-top: 8px; max-width: 480px;">Mission Control locked as v1.0. See the <a href="Outer Orbit Design System.html" style="color: var(--accent-hi); text-decoration: none; border-bottom: 1px solid currentColor;">Design System</a> for components, tokens, and layout primitives.</div>
   </div>
   <div class="foot-meta">
     Devon Wallace<br>
@@ -1156,8 +1134,8 @@ footer.foot {
 
     // palette
     paletteRow.innerHTML = t.swatches.map(s => {
-      const isLight = ['Bone','Ignition'].includes(s.name);
-      const fg = isLight ? '#0A0907' : '#F2EADB';
+      const isLight = ['Bone'].includes(s.name);
+      const fg = isLight ? '#0B0D10' : '#F2F3F5';
       return `
         <div class="swatch" style="background:${s.hex}; color:${fg};">
           <div class="s-meta" style="opacity:.7;">${s.token}</div>

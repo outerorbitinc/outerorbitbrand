@@ -1,0 +1,1217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Outer Orbit Academy — Brand & Design System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   OUTER ORBIT ACADEMY — DESIGN SYSTEM v1.0
+   Sub-brand of Outer Orbit · Light-mode primary
+   ============================================================ */
+:root {
+  /* ── Backgrounds ── */
+  --bg:         #F8F7F4;   /* warm off-white canvas */
+  --bg-elev:    #FFFFFF;   /* card / elevated surface */
+  --bg-card:    #FFFFFF;
+  --bg-card-2:  #F1EFE9;   /* subtle inset / tinted */
+  --bg-dark:    #1E3554;   /* navy — section backgrounds */
+  --bg-dark-2:  #162843;
+
+  /* ── Lines / borders ── */
+  --line:        #E4E0D8;
+  --line-strong: #CFC9BF;
+
+  /* ── Foreground ── */
+  --fg:       #1C2B3A;    /* near-black navy */
+  --fg-dim:   #52697A;    /* mid-tone */
+  --fg-mute:  #8FA3B1;    /* subdued */
+  --fg-inv:   #F8F7F4;    /* on dark backgrounds */
+
+  /* ── Academy accent palette ── */
+  --blue:       oklch(52% 0.10 238);   /* #4A7FB5 — primary action */
+  --blue-hi:    oklch(60% 0.10 238);   /* hover */
+  --blue-tint:  color-mix(in srgb, var(--blue) 12%, transparent);
+  --teal:       oklch(62% 0.09 188);   /* #5BB5A2 — success / calm */
+  --teal-hi:    oklch(70% 0.09 188);
+  --teal-tint:  color-mix(in srgb, var(--teal) 12%, transparent);
+  --sand:       oklch(72% 0.08 76);    /* #C49B5A — warm accent */
+  --sand-hi:    oklch(79% 0.08 76);
+  --sand-tint:  color-mix(in srgb, var(--sand) 12%, transparent);
+  --navy:       #1E3554;
+
+  /* ── Status ── */
+  --ok:      #3DB88A;
+  --warn:    #E05B3A;
+  --caution: #D4901F;
+
+  /* ── Spacing (4pt base) ── */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+  /* ── Radii ── */
+  --r-0: 0px; --r-1: 3px; --r-2: 6px; --r-3: 10px;
+  --r-4: 16px; --r-5: 24px; --r-pill: 999px;
+
+  /* ── Shadow / elevation ── */
+  --el-0: none;
+  --el-1: 0 1px 3px rgba(30,53,84,.08), 0 1px 0 var(--line);
+  --el-2: 0 4px 16px rgba(30,53,84,.10), 0 1px 0 var(--line);
+  --el-3: 0 12px 40px rgba(30,53,84,.14), 0 1px 0 var(--line);
+
+  /* ── Typography ── */
+  --ff-sans:  'Plus Jakarta Sans', system-ui, sans-serif;
+  --ff-serif: 'DM Serif Display', Georgia, serif;
+  --ff-mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4,h5,h6 { margin: 0; }
+p { margin: 0; }
+a { color: var(--blue); }
+
+.page { max-width: 1360px; margin: 0 auto; padding: 0 48px 160px; }
+
+/* ── Topbar ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: 1360px; margin: 0 auto;
+  padding: 14px 48px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.topbar-mark { width: 26px; height: 26px; color: var(--navy); }
+.topbar-wordmark {
+  font-size: 13px; font-weight: 700; letter-spacing: -.01em; color: var(--fg);
+}
+.topbar-wordmark span { color: var(--blue); font-weight: 500; }
+.topbar-divider { width: 1px; height: 18px; background: var(--line-strong); }
+.topbar-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-mute); }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.topbar-pill {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--blue); background: var(--blue-tint); border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  padding: 6px 12px; border-radius: var(--r-pill);
+}
+.topbar-link {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-dim); text-decoration: none; padding: 6px 12px;
+  border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  transition: all .15s;
+}
+.topbar-link:hover { background: var(--fg); color: var(--fg-inv); border-color: var(--fg); }
+
+/* ── Section scaffold ── */
+.sec { padding: 80px 0; border-bottom: 1px solid var(--line); }
+.sec-head {
+  display: grid; grid-template-columns: 200px 1fr 1fr; gap: 40px;
+  margin-bottom: 56px; align-items: start;
+}
+.sec-num { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-mute); padding-top: 6px; }
+.sec-num b { color: var(--blue); font-weight: 500; }
+.sec-title { font-size: clamp(28px, 3.5vw, 46px); line-height: 1.05; letter-spacing: -.02em; font-weight: 700; text-wrap: balance; }
+.sec-title em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--teal); }
+.sec-title .sand { color: var(--sand); }
+.sec-lede { color: var(--fg-dim); font-size: 15px; line-height: 1.65; text-wrap: pretty; padding-top: 4px; }
+.label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-mute); }
+
+/* ── Hero ── */
+.hero {
+  padding: 80px 0 72px;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 50%, color-mix(in srgb, var(--teal) 8%, transparent) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, color-mix(in srgb, var(--sand) 8%, transparent) 0%, transparent 100%);
+}
+.hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal);
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); animation: pulse 2.5s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; box-shadow:0 0 0 0 var(--teal); } 60% { opacity:.6; box-shadow:0 0 0 6px transparent; } }
+.hero h1 { font-size: clamp(44px, 6vw, 88px); line-height: .95; letter-spacing: -.03em; font-weight: 800; margin-bottom: 20px; }
+.hero h1 em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--teal); }
+.hero-sub { color: var(--fg-dim); font-size: 17px; max-width: 480px; text-wrap: pretty; line-height: 1.65; }
+.hero-stats { margin-top: 40px; display: flex; gap: 32px; }
+.hero-stat label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); display: block; margin-bottom: 4px; }
+.hero-stat span { font-size: 22px; font-weight: 700; letter-spacing: -.02em; color: var(--fg); }
+.hero-preview {
+  background: var(--bg-elev); border: 1px solid var(--line);
+  border-radius: var(--r-4); box-shadow: var(--el-3);
+  padding: 32px; display: flex; flex-direction: column; gap: 20px;
+}
+.hp-tag { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute); }
+.journey { display: flex; flex-direction: column; gap: 10px; }
+.journey-step {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px; border-radius: var(--r-3); border: 1px solid var(--line);
+  font-size: 13px; font-weight: 500;
+}
+.journey-step.done { background: var(--teal-tint); border-color: color-mix(in srgb, var(--teal) 30%, transparent); }
+.journey-step.done .j-dot { background: var(--teal); }
+.journey-step.active { background: var(--blue-tint); border-color: color-mix(in srgb, var(--blue) 30%, transparent); }
+.journey-step.active .j-dot { background: var(--blue); animation: pulse 2s infinite; }
+.j-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); flex-shrink: 0; }
+.j-label { color: var(--fg); }
+.j-sub { font-size: 11px; color: var(--fg-mute); font-weight: 400; margin-top: 1px; }
+
+/* ── Token grid ── */
+.tokens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.token {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-2);
+  background: var(--bg-card);
+}
+.token-chip { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: var(--r-1); flex-shrink: 0; }
+.token-info { font-family: var(--ff-mono); font-size: 11px; line-height: 1.6; }
+.tk-name { color: var(--fg); letter-spacing: .02em; }
+.tk-val { color: var(--fg-mute); letter-spacing: .02em; }
+
+/* ── Palette showcase ── */
+.palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--line); border-radius: var(--r-3); overflow: hidden; }
+.pal-swatch { aspect-ratio: 1.4; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; }
+.pal-name { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; }
+.pal-hex { font-family: var(--ff-mono); font-size: 10px; opacity: .75; margin-top: 2px; }
+
+/* ── Typography ── */
+.type-specimen { padding: 40px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-3); margin-bottom: 16px; }
+.type-pair { display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.type-pair:last-child { border-bottom: 0; }
+.type-meta { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute); line-height: 1.8; }
+
+/* ── Logo options ── */
+.logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.logo-card {
+  border: 1px solid var(--line); border-radius: var(--r-4); overflow: hidden;
+  background: var(--bg-card); box-shadow: var(--el-1);
+}
+.logo-card-canvas {
+  padding: 48px 32px;
+  display: grid; place-items: center;
+  border-bottom: 1px solid var(--line);
+  min-height: 200px;
+}
+.logo-card-info { padding: 18px 20px; }
+.logo-card-label { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.logo-card-desc { font-size: 12px; color: var(--fg-dim); line-height: 1.5; }
+.logo-card-alts { display: flex; gap: 12px; padding: 16px 20px; border-top: 1px solid var(--line); background: var(--bg-card-2); }
+.logo-mini-canvas { width: 64px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: var(--r-2); }
+
+/* ── Logo SVG helpers ── */
+.oo-mark { color: var(--navy); }
+.academy-text-a { font-family: var(--ff-sans); font-weight: 800; letter-spacing: -.01em; color: var(--fg); }
+.academy-text-b { font-family: var(--ff-serif); font-style: italic; color: var(--fg); }
+.sub-text { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--fg-mute); }
+
+/* ── Buttons ── */
+.btn {
+  font-family: var(--ff-sans); font-weight: 600; font-size: 14px;
+  padding: 11px 22px; border-radius: var(--r-pill); border: 1.5px solid transparent;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  transition: all .18s ease; line-height: 1; text-decoration: none;
+}
+.btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn.primary:hover { background: var(--blue-hi); border-color: var(--blue-hi); box-shadow: 0 4px 16px color-mix(in srgb, var(--blue) 35%, transparent); }
+.btn.teal { background: var(--teal); color: #fff; border-color: var(--teal); }
+.btn.teal:hover { background: var(--teal-hi); border-color: var(--teal-hi); box-shadow: 0 4px 16px color-mix(in srgb, var(--teal) 35%, transparent); }
+.btn.navy { background: var(--navy); color: var(--fg-inv); border-color: var(--navy); }
+.btn.navy:hover { background: var(--bg-dark-2); }
+.btn.secondary { background: transparent; color: var(--fg); border-color: var(--line-strong); }
+.btn.secondary:hover { background: var(--bg-card-2); border-color: var(--fg-mute); }
+.btn.ghost { background: transparent; color: var(--blue); border-color: transparent; }
+.btn.ghost:hover { background: var(--blue-tint); }
+.btn.sm { font-size: 12px; padding: 8px 16px; }
+.btn.lg { font-size: 16px; padding: 15px 28px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* ── Component frame ── */
+.cf {
+  border: 1px solid var(--line); border-radius: var(--r-3);
+  background: linear-gradient(var(--line) 1px,transparent 1px) 0 0 / 40px 40px,
+              linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0 / 40px 40px, var(--bg);
+  padding: 36px; display: flex; flex-direction: column; gap: 20px;
+  position: relative;
+}
+.cf::before {
+  content: attr(data-label); position: absolute; top: 12px; left: 14px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-mute);
+}
+
+/* ── Course cards ── */
+.course-card {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--r-4); box-shadow: var(--el-1);
+  overflow: hidden; transition: all .2s; display: flex; flex-direction: column;
+}
+.course-card:hover { box-shadow: var(--el-2); border-color: var(--line-strong); transform: translateY(-2px); }
+.cc-thumb {
+  height: 140px;
+  background: linear-gradient(135deg, var(--navy) 0%, oklch(40% 0.09 238) 100%);
+  display: grid; place-items: center; position: relative; overflow: hidden;
+}
+.cc-thumb-stripe {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.03) 20px, rgba(255,255,255,.03) 40px);
+}
+.cc-badge { position: absolute; top: 12px; right: 12px; }
+.cc-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.cc-module { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); }
+.cc-title { font-size: 16px; font-weight: 700; line-height: 1.3; letter-spacing: -.01em; }
+.cc-desc { font-size: 13px; color: var(--fg-dim); line-height: 1.5; }
+.cc-foot { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--bg-card-2); }
+.cc-progress { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--fg-mute); }
+.cc-bar { flex: 1; height: 5px; background: var(--line); border-radius: var(--r-pill); overflow: hidden; width: 80px; }
+.cc-bar-fill { height: 100%; background: var(--teal); border-radius: var(--r-pill); }
+
+/* ── Callout boxes ── */
+.callout {
+  display: flex; gap: 16px; padding: 18px 20px;
+  border-radius: var(--r-3); border: 1.5px solid var(--line);
+  background: var(--bg-card);
+}
+.callout .c-icon { font-size: 20px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.callout .c-body h5 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.callout .c-body p { font-size: 13px; color: var(--fg-dim); line-height: 1.55; }
+.callout.tip { background: var(--teal-tint); border-color: color-mix(in srgb, var(--teal) 30%, transparent); }
+.callout.tip h5 { color: oklch(40% 0.09 188); }
+.callout.remember { background: var(--blue-tint); border-color: color-mix(in srgb, var(--blue) 30%, transparent); }
+.callout.remember h5 { color: oklch(38% 0.10 238); }
+.callout.warning { background: color-mix(in srgb, var(--sand) 10%, transparent); border-color: color-mix(in srgb, var(--sand) 35%, transparent); }
+.callout.warning h5 { color: oklch(48% 0.09 76); }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: var(--r-pill); border: 1px solid var(--line);
+  background: var(--bg-card-2); color: var(--fg-dim);
+}
+.badge.blue { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 30%, transparent); background: var(--blue-tint); }
+.badge.teal { color: oklch(40% 0.09 188); border-color: color-mix(in srgb, var(--teal) 30%, transparent); background: var(--teal-tint); }
+.badge.sand { color: oklch(48% 0.08 76); border-color: color-mix(in srgb, var(--sand) 35%, transparent); background: var(--sand-tint); }
+.badge.navy { color: var(--fg-inv); background: var(--navy); border-color: var(--navy); }
+
+/* ── Dark section ── */
+.dark-sec {
+  background: var(--navy);
+  color: var(--fg-inv);
+  border-radius: var(--r-5);
+  padding: 56px 48px;
+  margin: -1px 0;
+  position: relative;
+  overflow: hidden;
+}
+.dark-sec::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 90% 20%, oklch(62% 0.09 188 / .12) 0%, transparent 60%),
+              radial-gradient(ellipse 40% 40% at 10% 80%, oklch(72% 0.08 76 / .08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.dark-sec > * { position: relative; }
+
+/* ── Voice & tone ── */
+.message-card {
+  padding: 24px; background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--r-4); box-shadow: var(--el-1);
+}
+.message-card .mc-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 12px; }
+.message-card .mc-headline { font-size: clamp(20px, 2.5vw, 30px); font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 10px; text-wrap: balance; }
+.message-card .mc-sub { font-size: 14px; color: var(--fg-dim); line-height: 1.6; }
+.message-card .mc-audience { display: inline-flex; gap: 6px; margin-top: 16px; }
+
+/* ── Dos and Don'ts ── */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.do-box, .dont-box {
+  padding: 20px; border-radius: var(--r-3); border: 1.5px solid;
+}
+.do-box { border-color: color-mix(in srgb, var(--teal) 35%, transparent); background: var(--teal-tint); }
+.dont-box { border-color: color-mix(in srgb, var(--warn) 25%, transparent); background: color-mix(in srgb, var(--warn) 6%, transparent); }
+.do-box .dd-head { color: oklch(40% 0.09 188); font-weight: 700; font-size: 12px; font-family: var(--ff-mono); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+.dont-box .dd-head { color: var(--warn); font-weight: 700; font-size: 12px; font-family: var(--ff-mono); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+.dd-item { font-size: 13px; color: var(--fg); padding: 6px 0; border-bottom: 1px solid var(--line); line-height: 1.5; }
+.dd-item:last-child { border-bottom: 0; }
+
+/* ── Imagery placeholder ── */
+.img-placeholder {
+  background: repeating-linear-gradient(
+    -45deg, var(--line) 0, var(--line) 1px, transparent 0, transparent 50%
+  );
+  background-size: 12px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-3);
+  display: grid; place-items: center;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--fg-mute); text-align: center; padding: 16px; line-height: 1.6;
+}
+
+/* ── Progress bar ── */
+.progress { height: 8px; background: var(--line); border-radius: var(--r-pill); overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--blue)); border-radius: var(--r-pill); transition: width .4s; }
+
+/* ── Form inputs ── */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-dim); }
+.input, .select {
+  font-family: var(--ff-sans); font-size: 14px;
+  background: var(--bg-card); color: var(--fg);
+  border: 1.5px solid var(--line-strong);
+  padding: 11px 14px; border-radius: var(--r-2);
+  outline: none; width: 100%; transition: border-color .15s, box-shadow .15s;
+}
+.input:focus, .select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-tint); }
+.input::placeholder { color: var(--fg-mute); }
+
+/* ── Spacing bars ── */
+.sp-row { display: grid; grid-template-columns: 120px 80px 1fr; gap: 20px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.sp-row:first-child { border-top: 1px solid var(--line); }
+.sp-name { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .1em; color: var(--fg); text-transform: uppercase; }
+.sp-val { font-family: var(--ff-mono); font-size: 11px; color: var(--fg-mute); }
+.sp-bar { height: 14px; background: var(--blue); border-radius: 2px; }
+
+/* ── Two/three col ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* ── Footer ── */
+.foot { padding: 64px 0 0; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; border-top: 1px solid var(--line); }
+.foot-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-mute); text-align: right; line-height: 2.2; }
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .page { padding: 0 20px 80px; }
+  .topbar-inner { padding: 12px 20px; }
+  .hero-inner, .sec-head, .two-col, .three-col, .four-col, .logo-grid { grid-template-columns: 1fr !important; }
+  .tokens-grid { grid-template-columns: 1fr; }
+  .palette { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <svg class="topbar-mark" viewBox="179 -30 260 260" fill="currentColor">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+      <div class="topbar-wordmark">Outer Orbit <span>Academy</span></div>
+      <div class="topbar-divider"></div>
+      <div class="topbar-label">Brand &amp; Design System v1.0</div>
+    </div>
+    <div class="topbar-right">
+      <a class="topbar-link" href="Outer Orbit Design System.html">↑ Parent System</a>
+      <span class="topbar-pill">Academy · Sub-Brand</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Outer Orbit · Academy · Brand System v1.0</div>
+      <h1>From <em>chaos</em> to clarity.</h1>
+      <p class="hero-sub">The brand language for Outer Orbit Academy — a sub-brand built to bring warmth, trust, and accessibility to the parent identity. Light-mode first. Designed for humans, not developers.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><label>Audience</label><span>50+</span></div>
+        <div class="hero-stat"><label>Mode</label><span>Light</span></div>
+        <div class="hero-stat"><label>Tokens</label><span>32+</span></div>
+      </div>
+    </div>
+    <div class="hero-preview">
+      <div class="hp-tag">// The Journey</div>
+      <div class="journey">
+        <div class="journey-step">
+          <div class="j-dot"></div>
+          <div>
+            <div class="j-label">Before — the mental tornado</div>
+            <div class="j-sub">Overwhelmed. Unsure where to start with AI.</div>
+          </div>
+        </div>
+        <div class="journey-step done">
+          <div class="j-dot"></div>
+          <div>
+            <div class="j-label">During — structure emerges</div>
+            <div class="j-sub">Small wins. Practical prompts. Real results.</div>
+          </div>
+        </div>
+        <div class="journey-step active">
+          <div class="j-dot"></div>
+          <div>
+            <div class="j-label">After — peaceful clarity</div>
+            <div class="j-sub">AI works for you, not the other way around.</div>
+          </div>
+        </div>
+      </div>
+      <div class="progress"><div class="progress-fill" style="width: 68%;"></div></div>
+      <div style="font-size:12px; color: var(--fg-mute); font-family: var(--ff-mono); letter-spacing: .08em;">Module 4 of 6 · 68% complete</div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 BRAND IDENTITY -->
+<section class="sec" id="identity">
+  <div class="sec-head">
+    <div class="sec-num"><b>01</b> / Identity</div>
+    <h2 class="sec-title">The <em>Academy</em> mark.</h2>
+    <p class="sec-lede">Three lockup directions — each inherits the Outer Orbit mark but carves out a distinct Academy personality. Choose one as primary; the others become alternates for different contexts.</p>
+  </div>
+
+  <div class="logo-grid">
+
+    <!-- Option A: Bold stacked -->
+    <div class="logo-card">
+      <div class="logo-card-canvas" style="background: var(--bg);">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
+          <svg width="56" height="56" viewBox="179 -30 260 260" fill="var(--navy)">
+            <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+            <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+            <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+          </svg>
+          <div>
+            <div style="font-family: var(--ff-sans); font-weight: 800; font-size: 22px; letter-spacing: -.02em; color: var(--fg); line-height: 1; text-transform: uppercase;">Outer Orbit</div>
+            <div style="font-family: var(--ff-sans); font-weight: 400; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--teal); margin-top: 4px;">Academy</div>
+          </div>
+        </div>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-label">A — Stacked Lockup</div>
+        <div class="logo-card-desc">Parent wordmark + "Academy" as a calm subtext. Strongest visual hierarchy. Works well on course materials, headers, and print.</div>
+      </div>
+      <div class="logo-card-alts">
+        <div class="logo-mini-canvas" style="background: var(--navy);">
+          <svg width="28" height="28" viewBox="179 -30 260 260" fill="white"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+        <div class="logo-mini-canvas" style="background: var(--teal);">
+          <svg width="28" height="28" viewBox="179 -30 260 260" fill="white"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+        <div class="logo-mini-canvas">
+          <svg width="28" height="28" viewBox="179 -30 260 260" fill="var(--navy)"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option B: Horizontal inline -->
+    <div class="logo-card">
+      <div class="logo-card-canvas" style="background: var(--bg);">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <svg width="48" height="48" viewBox="179 -30 260 260" fill="var(--navy)">
+            <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+            <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+            <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+          </svg>
+          <div style="width: 1px; height: 44px; background: var(--line-strong);"></div>
+          <div>
+            <div style="font-family: var(--ff-sans); font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 3px;">Outer Orbit</div>
+            <div style="font-family: var(--ff-serif); font-style: italic; font-size: 26px; color: var(--fg); line-height: 1; letter-spacing: -.01em;">Academy</div>
+          </div>
+        </div>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-label">B — Horizontal + Serif</div>
+        <div class="logo-card-desc">Mark + divider + italic serif wordmark. Editorial, warm, confident. Best for website header, email headers, document covers.</div>
+      </div>
+      <div class="logo-card-alts">
+        <div class="logo-mini-canvas" style="background: var(--navy);">
+          <span style="font-family: var(--ff-serif); font-style: italic; font-size: 13px; color: white; letter-spacing: -.01em;">Acad.</span>
+        </div>
+        <div class="logo-mini-canvas" style="background: var(--bg-card-2);">
+          <span style="font-family: var(--ff-serif); font-style: italic; font-size: 13px; color: var(--fg); letter-spacing: -.01em;">Acad.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option C: Badge / emblem -->
+    <div class="logo-card">
+      <div class="logo-card-canvas" style="background: var(--bg);">
+        <div style="position: relative; width: 120px; height: 120px;">
+          <!-- Circle border -->
+          <svg width="120" height="120" viewBox="0 0 120 120" style="position: absolute; inset: 0;">
+            <circle cx="60" cy="60" r="56" fill="none" stroke="var(--navy)" stroke-width="2"/>
+            <circle cx="60" cy="60" r="50" fill="var(--navy)"/>
+          </svg>
+          <!-- Mark inside -->
+          <svg style="position:absolute; top: 18px; left: 18px;" width="84" height="84" viewBox="179 -30 260 260" fill="white">
+            <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+            <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+            <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="logo-card-info">
+        <div class="logo-card-label">C — Badge / Emblem</div>
+        <div class="logo-card-desc">Self-contained circular emblem. Strong at small sizes — profile images, favicons, course certificates, merchandise.</div>
+      </div>
+      <div class="logo-card-alts">
+        <div class="logo-mini-canvas" style="background: var(--teal); border-radius: 50%;">
+          <svg width="28" height="28" viewBox="179 -30 260 260" fill="white"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+        <div class="logo-mini-canvas" style="background: var(--sand-tint); border-radius: 50%; border-color: var(--sand);">
+          <svg width="28" height="28" viewBox="179 -30 260 260" fill="var(--navy)"><path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/><path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/><path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/></svg>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /logo-grid -->
+</section>
+
+<!-- 02 COLOR TOKENS -->
+<section class="sec" id="color">
+  <div class="sec-head">
+    <div class="sec-num"><b>02</b> / Color</div>
+    <h2 class="sec-title">Calm <em>clarity</em> in four tones.</h2>
+    <p class="sec-lede">A light-mode palette rooted in slate, teal, and warm sand. Each color carries a meaning: navy anchors, blue acts, teal reassures, sand warms. The parent brand's electric yellow is retired here; these colors are designed to be approachable to all ages.</p>
+  </div>
+
+  <!-- Palette showcase -->
+  <div style="margin-bottom: 32px;">
+    <div class="label" style="margin-bottom: 12px;">Academy Palette</div>
+    <div class="palette">
+      <div class="pal-swatch" style="background: var(--navy);">
+        <div class="pal-name" style="color: rgba(255,255,255,.9);">Navy</div>
+        <div class="pal-hex" style="color: rgba(255,255,255,.55);">#1E3554</div>
+      </div>
+      <div class="pal-swatch" style="background: var(--blue);">
+        <div class="pal-name" style="color: rgba(255,255,255,.9);">Blue</div>
+        <div class="pal-hex" style="color: rgba(255,255,255,.55);">oklch 52%</div>
+      </div>
+      <div class="pal-swatch" style="background: var(--teal);">
+        <div class="pal-name" style="color: rgba(255,255,255,.9);">Teal</div>
+        <div class="pal-hex" style="color: rgba(255,255,255,.55);">oklch 62%</div>
+      </div>
+      <div class="pal-swatch" style="background: var(--sand);">
+        <div class="pal-name" style="color: rgba(255,255,255,.9);">Sand</div>
+        <div class="pal-hex" style="color: rgba(255,255,255,.55);">oklch 72%</div>
+      </div>
+      <div class="pal-swatch" style="background: var(--bg-card-2); border-right: 0;">
+        <div class="pal-name" style="color: var(--fg-mute);">Parchment</div>
+        <div class="pal-hex" style="color: var(--fg-mute);">#F1EFE9</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semantic usage -->
+  <div class="label" style="margin-bottom: 12px;">Color roles &amp; usage</div>
+  <div class="two-col" style="margin-bottom: 32px;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div class="token"><div class="token-chip" style="background: var(--navy);"></div><div class="token-info"><div class="tk-name">--navy · #1E3554</div><div class="tk-val">Dark backgrounds · brand anchor · authority</div></div></div>
+      <div class="token"><div class="token-chip" style="background: var(--blue);"></div><div class="token-info"><div class="tk-name">--blue · Primary action</div><div class="tk-val">Buttons · links · interactive states</div></div></div>
+      <div class="token"><div class="token-chip" style="background: var(--teal);"></div><div class="token-info"><div class="tk-name">--teal · Reassurance</div><div class="tk-val">Progress · success · tips · calm moments</div></div></div>
+      <div class="token"><div class="token-chip" style="background: var(--sand);"></div><div class="token-info"><div class="tk-name">--sand · Warmth</div><div class="tk-val">Highlights · callouts · human touch</div></div></div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div class="token"><div class="token-chip" style="background: var(--bg); border: 1px solid var(--line);"></div><div class="token-info"><div class="tk-name">--bg · #F8F7F4</div><div class="tk-val">Page canvas · warm off-white · print safe</div></div></div>
+      <div class="token"><div class="token-chip" style="background: var(--bg-card); border: 1px solid var(--line);"></div><div class="token-info"><div class="tk-name">--bg-card · #FFFFFF</div><div class="tk-val">Card surfaces · elevated content</div></div></div>
+      <div class="token"><div class="token-chip" style="background: var(--fg);"></div><div class="token-info"><div class="tk-name">--fg · #1C2B3A</div><div class="tk-val">Body text · primary foreground</div></div></div>
+      <div class="token"><div class="token-chip" style="background: var(--fg-dim);"></div><div class="token-info"><div class="tk-name">--fg-dim · #52697A</div><div class="tk-val">Secondary text · captions · labels</div></div></div>
+    </div>
+  </div>
+
+  <!-- Dark section example -->
+  <div class="label" style="margin-bottom: 12px;">Navy section — dark mode slice</div>
+  <div class="dark-sec">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+      <div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px;">For landing pages &amp; hero sections</div>
+        <h3 style="font-size: clamp(28px, 4vw, 48px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; color: var(--fg-inv); margin-bottom: 16px; text-wrap: balance;">You don't need to be a tech person to use AI.</h3>
+        <p style="color: rgba(248,247,244,.6); font-size: 16px; line-height: 1.65; text-wrap: pretty; max-width: 420px;">If you can write a text message, you can use AI. Outer Orbit Academy shows you exactly how — step by step, no jargon.</p>
+        <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn teal">Start Learning Free</button>
+          <button class="btn" style="background: rgba(248,247,244,.1); color: var(--fg-inv); border-color: rgba(248,247,244,.2);">See the Course</button>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r-3); padding: 16px 20px; display: flex; align-items: center; gap: 14px;">
+          <div style="width: 36px; height: 36px; border-radius: var(--r-2); background: var(--teal-tint); border: 1px solid color-mix(in srgb, var(--teal) 30%, transparent); display: grid; place-items: center; flex-shrink: 0; font-size: 16px;">✓</div>
+          <div style="font-size: 14px; color: rgba(248,247,244,.85);">No tech background required</div>
+        </div>
+        <div style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r-3); padding: 16px 20px; display: flex; align-items: center; gap: 14px;">
+          <div style="width: 36px; height: 36px; border-radius: var(--r-2); background: var(--blue-tint); border: 1px solid color-mix(in srgb, var(--blue) 30%, transparent); display: grid; place-items: center; flex-shrink: 0; font-size: 16px;">⏱</div>
+          <div style="font-size: 14px; color: rgba(248,247,244,.85);">Learn in under 30 minutes per module</div>
+        </div>
+        <div style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r-3); padding: 16px 20px; display: flex; align-items: center; gap: 14px;">
+          <div style="width: 36px; height: 36px; border-radius: var(--r-2); background: var(--sand-tint); border: 1px solid color-mix(in srgb, var(--sand) 30%, transparent); display: grid; place-items: center; flex-shrink: 0; font-size: 16px;">★</div>
+          <div style="font-size: 14px; color: rgba(248,247,244,.85);">Practical — real prompts you can use today</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 TYPOGRAPHY -->
+<section class="sec" id="typography">
+  <div class="sec-head">
+    <div class="sec-num"><b>03</b> / Typography</div>
+    <h2 class="sec-title">Words that <em>welcome.</em></h2>
+    <p class="sec-lede">Plus Jakarta Sans for all UI and body — warm, humanist, highly legible. DM Serif Display for editorial moments and headlines that need emotional weight. JetBrains Mono inherited from the parent brand for labels, codes, and metadata.</p>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-pair">
+      <div class="type-meta">
+        Display<br>DM Serif Display<br>Italic<br>Emotional / editorial
+      </div>
+      <div style="font-family: var(--ff-serif); font-style: italic; font-size: clamp(40px, 6vw, 72px); line-height: 1; letter-spacing: -.02em; color: var(--fg);">From overwhelmed<br>to in <span style="color: var(--teal);">control.</span></div>
+    </div>
+    <div class="type-pair">
+      <div class="type-meta">
+        H1 · Heading<br>Plus Jakarta Sans<br>800 weight<br>Page titles
+      </div>
+      <div style="font-size: clamp(28px, 4vw, 48px); font-weight: 800; line-height: 1.05; letter-spacing: -.025em; color: var(--fg);">AI Basics for Busy People<br><span style="color: var(--blue);">Who Have Real Lives.</span></div>
+    </div>
+    <div class="type-pair">
+      <div class="type-meta">
+        H2 · Subheading<br>Plus Jakarta Sans<br>700 weight<br>Section headers
+      </div>
+      <div style="font-size: clamp(20px, 2.5vw, 30px); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; color: var(--fg);">Your first prompt is closer<br>than you think.</div>
+    </div>
+    <div class="type-pair">
+      <div class="type-meta">
+        Body · Large<br>Plus Jakarta Sans<br>400 weight · 17px<br>Hero paragraphs
+      </div>
+      <div style="font-size: 17px; line-height: 1.7; color: var(--fg-dim); max-width: 560px; text-wrap: pretty;">Every module is designed to fit into your real life — on a lunch break, at the kitchen table, or whenever you have 20 quiet minutes. No prior experience needed. No jargon. Just clear, practical steps you'll actually use.</div>
+    </div>
+    <div class="type-pair">
+      <div class="type-meta">
+        Body · Default<br>Plus Jakarta Sans<br>400 weight · 15px<br>Course content
+      </div>
+      <div style="font-size: 15px; line-height: 1.65; color: var(--fg); max-width: 560px; text-wrap: pretty;">ChatGPT, Claude, and Gemini are all large language models — which just means they're very good at understanding and generating text. You don't need to know how they work. You just need to know how to talk to them.</div>
+    </div>
+    <div class="type-pair">
+      <div class="type-meta">
+        Label / UI<br>JetBrains Mono<br>500 weight · 10px<br>Uppercase metadata
+      </div>
+      <div style="font-family: var(--ff-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-mute);">Module 3 · Prompt Basics · 18 min read</div>
+    </div>
+  </div>
+
+  <!-- Type scale quick reference -->
+  <div style="margin-top: 32px;">
+    <div class="label" style="margin-bottom: 16px;">Scale quick reference</div>
+    <div style="display: flex; flex-direction: column; gap: 0;">
+      <div style="display: grid; grid-template-columns: 160px 80px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline;">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute);">Display</div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">72–88px</div>
+        <div style="font-family: var(--ff-serif); font-style: italic; font-size: 36px; line-height: 1; letter-spacing: -.02em;">DM Serif Display</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 160px 80px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline;">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute);">H1</div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">44–64px</div>
+        <div style="font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -.025em;">Plus Jakarta Sans 800</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 160px 80px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline;">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute);">H2</div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">28–36px</div>
+        <div style="font-size: 24px; font-weight: 700; line-height: 1; letter-spacing: -.015em;">Plus Jakarta Sans 700</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 160px 80px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline;">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute);">Body Large</div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">17px</div>
+        <div style="font-size: 17px; font-weight: 400; line-height: 1.7; color: var(--fg-dim);">Comfortable reading — landing pages, intros</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 160px 80px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline;">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute);">Body</div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">15px</div>
+        <div style="font-size: 15px; font-weight: 400; line-height: 1.65; color: var(--fg-dim);">Default — course content, cheat sheets, UI</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 160px 80px 1fr; gap: 20px; padding: 14px 0; align-items: baseline;">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-mute);">Label / Mono</div>
+        <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">10–11px</div>
+        <div style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-mute);">JetBrains Mono — metadata, labels</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 COMPONENTS -->
+<section class="sec" id="components">
+  <div class="sec-head">
+    <div class="sec-num"><b>04</b> / Components</div>
+    <h2 class="sec-title">Built to <em>teach.</em></h2>
+    <p class="sec-lede">Components designed specifically for the Academy context — course cards, callout boxes, progress indicators, and action buttons. All are print-accessible and WCAG AA compliant.</p>
+  </div>
+
+  <!-- Buttons -->
+  <div class="label" style="margin-bottom: 14px;">Buttons</div>
+  <div class="cf" data-label="btn-system" style="margin-bottom: 32px;">
+    <div class="btn-row">
+      <button class="btn primary lg">Start the Course</button>
+      <button class="btn teal lg">Continue Learning</button>
+      <button class="btn navy lg">Download PDF</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary">Enroll Now</button>
+      <button class="btn teal">Next Module</button>
+      <button class="btn secondary">Preview Lesson</button>
+      <button class="btn ghost">Learn More</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary sm">Save Progress</button>
+      <button class="btn secondary sm">Share</button>
+      <button class="btn ghost sm">Skip for now</button>
+    </div>
+  </div>
+
+  <!-- Course cards -->
+  <div class="label" style="margin-bottom: 14px;">Course cards</div>
+  <div class="three-col" style="margin-bottom: 32px;">
+    <div class="course-card">
+      <div class="cc-thumb">
+        <div class="cc-thumb-stripe"></div>
+        <span class="badge teal cc-badge">Completed</span>
+        <div style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.4);">MODULE 01</div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-module">Module 01</div>
+        <div class="cc-title">What Is AI, Really?</div>
+        <div class="cc-desc">Cut through the noise. Understand what AI can and can't do — in plain English.</div>
+      </div>
+      <div class="cc-foot">
+        <div class="cc-progress">
+          <div class="cc-bar"><div class="cc-bar-fill" style="width:100%;"></div></div>
+          100%
+        </div>
+        <span class="badge teal" style="font-size: 9px;">Done</span>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="cc-thumb" style="background: linear-gradient(135deg, oklch(40% 0.09 188) 0%, oklch(52% 0.10 238) 100%);">
+        <div class="cc-thumb-stripe"></div>
+        <span class="badge blue cc-badge">In Progress</span>
+        <div style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.4);">MODULE 02</div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-module">Module 02</div>
+        <div class="cc-title">Your First Prompt</div>
+        <div class="cc-desc">Write prompts that actually get useful answers. The one skill that changes everything.</div>
+      </div>
+      <div class="cc-foot">
+        <div class="cc-progress">
+          <div class="cc-bar"><div class="cc-bar-fill" style="width:60%;"></div></div>
+          60%
+        </div>
+        <button class="btn teal sm">Continue</button>
+      </div>
+    </div>
+    <div class="course-card" style="opacity: .7;">
+      <div class="cc-thumb" style="background: linear-gradient(135deg, oklch(48% 0.08 76) 0%, oklch(38% 0.06 76) 100%);">
+        <div class="cc-thumb-stripe"></div>
+        <span class="badge cc-badge">Locked</span>
+        <div style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: .14em; color: rgba(255,255,255,.4);">MODULE 03</div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-module">Module 03</div>
+        <div class="cc-title">Save Hours Every Week</div>
+        <div class="cc-desc">Emails, summaries, research — real tasks you can hand off to AI starting today.</div>
+      </div>
+      <div class="cc-foot">
+        <div class="cc-progress">
+          <div class="cc-bar"><div class="cc-bar-fill" style="width:0%;"></div></div>
+          Not started
+        </div>
+        <span class="badge" style="font-size: 9px;">Locked</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Callout boxes -->
+  <div class="label" style="margin-bottom: 14px;">Callout boxes — for course materials</div>
+  <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+    <div class="callout tip">
+      <div class="c-icon">💡</div>
+      <div class="c-body">
+        <h5>Pro Tip</h5>
+        <p>Start every prompt with the role you want the AI to play: "Act as a patient writing coach..." This one change dramatically improves your results.</p>
+      </div>
+    </div>
+    <div class="callout remember">
+      <div class="c-icon">📌</div>
+      <div class="c-body">
+        <h5>Remember</h5>
+        <p>AI doesn't know who you are unless you tell it. Give it context — your job, your goal, your audience — and the output gets 10x better.</p>
+      </div>
+    </div>
+    <div class="callout warning">
+      <div class="c-icon">⚠️</div>
+      <div class="c-body">
+        <h5>Watch Out</h5>
+        <p>AI can make things up. Always verify facts, figures, and dates before you share them. Use AI as a starting point, not the final word.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Badges -->
+  <div class="label" style="margin-bottom: 14px;">Badges &amp; labels</div>
+  <div class="cf" data-label="badges" style="margin-bottom: 0;">
+    <div class="btn-row">
+      <span class="badge blue">Free Module</span>
+      <span class="badge teal">Completed</span>
+      <span class="badge sand">New</span>
+      <span class="badge navy">Certificate</span>
+      <span class="badge">Draft</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 VOICE & TONE -->
+<section class="sec" id="voice">
+  <div class="sec-head">
+    <div class="sec-num"><b>05</b> / Voice &amp; Tone</div>
+    <h2 class="sec-title">What we <em>say</em> and how.</h2>
+    <p class="sec-lede">The Academy speaks like a knowledgeable friend — not a professor, not a startup, not a salesperson. Warm, direct, respectful of your time. We never talk down. We never hype. We just show the path.</p>
+  </div>
+
+  <!-- Brand voice pillars -->
+  <div class="three-col" style="margin-bottom: 40px;">
+    <div style="padding: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-4); border-top: 3px solid var(--teal);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;">Pillar 01</div>
+      <h4 style="font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 10px;">Clear, not clever.</h4>
+      <p style="font-size: 14px; color: var(--fg-dim); line-height: 1.6;">Plain language always wins. If a 60-year-old who's never used AI would have to Google a word, replace it. "Large language model" becomes "AI assistant." "Prompt engineering" becomes "how to ask better questions."</p>
+    </div>
+    <div style="padding: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-4); border-top: 3px solid var(--blue);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Pillar 02</div>
+      <h4 style="font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 10px;">Encouraging, not cheerful.</h4>
+      <p style="font-size: 14px; color: var(--fg-dim); line-height: 1.6;">There's a difference between honest encouragement and hollow enthusiasm. We don't say "Amazing!" or "You've got this!" We say "That's a real use case — here's how to make it work." Respect over enthusiasm.</p>
+    </div>
+    <div style="padding: 28px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-4); border-top: 3px solid var(--sand);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--sand); margin-bottom: 12px;">Pillar 03</div>
+      <h4 style="font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 10px;">Practical, not theoretical.</h4>
+      <p style="font-size: 14px; color: var(--fg-dim); line-height: 1.6;">Every lesson ends with something you can actually do. Not "now you understand AI" but "here's the exact prompt you can copy and use for your grocery list, your email, your weekend plan." Real life, not demos.</p>
+    </div>
+  </div>
+
+  <!-- Message angles for the two audiences -->
+  <div class="label" style="margin-bottom: 16px;">Messaging angles by audience</div>
+  <div class="two-col" style="margin-bottom: 40px;">
+    <div>
+      <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line);">Audience #1 — Retirees &amp; 50+ learners</div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="message-card">
+          <div class="mc-label">Angle A · Safety &amp; Belonging</div>
+          <div class="mc-headline">"Everyone's talking about AI. Here's what it actually means for you."</div>
+          <div class="mc-sub">Validates the feeling of being left out without exploiting it. Positions the course as a trusted guide, not a crash course.</div>
+          <div class="mc-audience"><span class="badge teal">50+ primary</span></div>
+        </div>
+        <div class="message-card">
+          <div class="mc-label">Angle B · Peace of mind</div>
+          <div class="mc-headline">"Stop feeling like the room got ahead of you. Catch up in a weekend."</div>
+          <div class="mc-sub">Directly addresses the anxiety of falling behind without being alarmist. Gives a concrete time frame — makes the promise feel achievable.</div>
+          <div class="mc-audience"><span class="badge teal">50+ primary</span></div>
+        </div>
+        <div class="message-card">
+          <div class="mc-label">Angle C · Empowerment</div>
+          <div class="mc-headline">"You've learned harder things. This one just has a better payoff."</div>
+          <div class="mc-sub">Respects life experience. Draws on resilience. Great for people who feel the tech is beneath them, not above them.</div>
+          <div class="mc-audience"><span class="badge teal">50+ primary</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line);">Audience #2 — Busy professionals (basic users)</div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="message-card">
+          <div class="mc-label">Angle A · Efficiency</div>
+          <div class="mc-headline">"You're using 5% of what AI can do. The other 95% saves real hours."</div>
+          <div class="mc-sub">Speaks directly to someone who uses AI to "fix this email." Shows the gap between what they do and what's possible — without shame.</div>
+          <div class="mc-audience"><span class="badge blue">Professional</span></div>
+        </div>
+        <div class="message-card">
+          <div class="mc-label">Angle B · Competitive edge</div>
+          <div class="mc-headline">"Your peers are getting promoted because they prompt better. Here's how."</div>
+          <div class="mc-sub">Creates professional urgency. Works well for LinkedIn and professional networks. Be careful not to lean too hard on fear.</div>
+          <div class="mc-audience"><span class="badge blue">Professional</span></div>
+        </div>
+        <div class="message-card">
+          <div class="mc-label">Angle C · Reclaim time</div>
+          <div class="mc-headline">"Stop doing in two hours what AI can do in two minutes."</div>
+          <div class="mc-sub">The simplest, most direct value prop for busy people. Works for any medium — ad headline, subject line, social post.</div>
+          <div class="mc-audience"><span class="badge blue">Professional</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tagline options -->
+  <div class="label" style="margin-bottom: 16px;">Tagline candidates</div>
+  <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px;">
+    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: 20px; align-items: center; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-3);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">T-01</div>
+      <div>
+        <div style="font-size: 18px; font-weight: 700; letter-spacing: -.01em;">"AI in plain English."</div>
+        <div style="font-size: 12px; color: var(--fg-dim); margin-top: 3px;">Simple. Memorable. Instantly understood by both audiences. Works at any size.</div>
+      </div>
+      <span class="badge teal">Recommended</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: 20px; align-items: center; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-3);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">T-02</div>
+      <div>
+        <div style="font-size: 18px; font-weight: 700; letter-spacing: -.01em;">"From overwhelmed to in control."</div>
+        <div style="font-size: 12px; color: var(--fg-dim); margin-top: 3px;">Emotional journey. Maps directly to the chaos → clarity → peace concept. Longer — better for body copy than logos.</div>
+      </div>
+      <span class="badge blue">Journey</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: 20px; align-items: center; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-3);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">T-03</div>
+      <div>
+        <div style="font-size: 18px; font-weight: 700; letter-spacing: -.01em;">"Stop guessing. Start prompting."</div>
+        <div style="font-size: 12px; color: var(--fg-dim); margin-top: 3px;">Punchy, direct. Works for Audience #2 (busy professionals). Too sharp for the 50+ retiree angle.</div>
+      </div>
+      <span class="badge">Pro audience</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: 20px; align-items: center; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-3);">
+      <div style="font-family: var(--ff-mono); font-size: 10px; color: var(--fg-mute);">T-04</div>
+      <div>
+        <div style="font-size: 18px; font-weight: 700; letter-spacing: -.01em;">"The AI course built for real life."</div>
+        <div style="font-size: 12px; color: var(--fg-dim); margin-top: 3px;">Universal. Positions against abstract/academic AI courses. Emphasizes practicality without mentioning a specific audience.</div>
+      </div>
+      <span class="badge sand">Universal</span>
+    </div>
+  </div>
+
+  <!-- Dos and don'ts -->
+  <div class="label" style="margin-bottom: 16px;">Copy dos &amp; don'ts</div>
+  <div class="do-dont">
+    <div class="do-box">
+      <div class="dd-head">✓ Do write like this</div>
+      <div class="dd-item">"If you can send a text, you can use AI."</div>
+      <div class="dd-item">"Pick one task you do every week. By the end of Module 2, AI will do it for you."</div>
+      <div class="dd-item">"You've already waited long enough. Let's fix that today."</div>
+      <div class="dd-item">"No jargon. No hype. Just what actually works."</div>
+    </div>
+    <div class="dont-box">
+      <div class="dd-head">✗ Avoid this</div>
+      <div class="dd-item">"Unlock the power of cutting-edge LLM technology!"</div>
+      <div class="dd-item">"Don't get left behind in the AI revolution."</div>
+      <div class="dd-item">"Amazing! You're crushing it! Keep it up! 🚀🔥"</div>
+      <div class="dd-item">"This course will 10x your productivity and change your life."</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 IMAGERY -->
+<section class="sec" id="imagery">
+  <div class="sec-head">
+    <div class="sec-num"><b>06</b> / Imagery</div>
+    <h2 class="sec-title">Real people, <em>real moments.</em></h2>
+    <p class="sec-lede">Photography should feel like a Sunday morning — warm, unhurried, real. The visual narrative runs from mental chaos (the tornado) through the learning journey to calm confidence. No stock-photo perfection; imperfect, lived-in moments work better for this audience.</p>
+  </div>
+
+  <div class="three-col" style="margin-bottom: 32px;">
+    <div>
+      <div class="img-placeholder" style="height: 220px; margin-bottom: 12px;">
+        Person at kitchen table · laptop · warm morning light · coffee · relaxed expression
+      </div>
+      <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Hero imagery — the "before" warmth</div>
+      <div style="font-size: 13px; color: var(--fg-dim);">50–65 year old, natural setting, slightly overwhelmed but curious. Warm tones. Not staged.</div>
+    </div>
+    <div>
+      <div class="img-placeholder" style="height: 220px; background: color-mix(in srgb, var(--teal) 6%, var(--bg-card-2)); margin-bottom: 12px;">
+        Same person · now smiling · pen &amp; notebook beside laptop · "aha moment" expression
+      </div>
+      <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Transformation moment — the "during"</div>
+      <div style="font-size: 13px; color: var(--fg-dim);">The moment something clicks. Small smile, not ecstasy. Teal tones reinforce the calm of learning.</div>
+    </div>
+    <div>
+      <div class="img-placeholder" style="height: 220px; background: color-mix(in srgb, var(--blue) 5%, var(--bg-card-2)); margin-bottom: 12px;">
+        Person outdoors · perhaps walking · mountains or park · phone in hand · fully at ease
+      </div>
+      <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">Outcome imagery — the "after"</div>
+      <div style="font-size: 13px; color: var(--fg-dim);">Peaceful, confident. The mountain walk concept. AI is now invisible — they've just got their life back.</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="label" style="margin-bottom: 12px;">Photography rules</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px; display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--teal); font-weight: 700; flex-shrink: 0;">✓</span>
+          <span>Natural light — no studio flash, no perfect exposure</span>
+        </div>
+        <div style="padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px; display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--teal); font-weight: 700; flex-shrink: 0;">✓</span>
+          <span>Real environments — home, café, outdoor. Not conference rooms.</span>
+        </div>
+        <div style="padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px; display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--teal); font-weight: 700; flex-shrink: 0;">✓</span>
+          <span>Represent the audience — 50+ faces, diverse backgrounds, reading glasses on the table is fine</span>
+        </div>
+        <div style="padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px; display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--warn); font-weight: 700; flex-shrink: 0;">✗</span>
+          <span>No cyborgs, robot arms, glowing AI graphics — this alienates Audience #1</span>
+        </div>
+        <div style="padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px; display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--warn); font-weight: 700; flex-shrink: 0;">✗</span>
+          <span>No 30-year-old tech bros. No hoodie-in-front-of-code-screens imagery.</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="label" style="margin-bottom: 12px;">Color treatment on photography</div>
+      <div style="padding: 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-3); display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 40px; height: 28px; border-radius: 3px; background: linear-gradient(135deg, oklch(82% 0.04 76), oklch(92% 0.02 188)); flex-shrink: 0; border: 1px solid var(--line);"></div>
+          <div style="font-size: 13px; color: var(--fg-dim);">Warm beige-to-teal overlay at 15–20% opacity for hero images. Ties photo to brand palette.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 40px; height: 28px; border-radius: 3px; background: linear-gradient(135deg, var(--navy), oklch(35% 0.08 238)); flex-shrink: 0;"></div>
+          <div style="font-size: 13px; color: var(--fg-dim);">Navy-to-blue overlay for dark section backgrounds. Maintains photo mood while hitting brand colors.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 40px; height: 28px; border-radius: 3px; background: linear-gradient(to right, rgba(248,247,244,1), rgba(248,247,244,0)); flex-shrink: 0; border: 1px solid var(--line);"></div>
+          <div style="font-size: 13px; color: var(--fg-dim);">Horizontal fade-to-canvas for side-by-side text + image layouts. Clean, readable.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 SPACING -->
+<section class="sec" id="spacing">
+  <div class="sec-head">
+    <div class="sec-num"><b>07</b> / Spacing</div>
+    <h2 class="sec-title">Room to <em>breathe.</em></h2>
+    <p class="sec-lede">More generous than the parent brand. Wider line spacing, larger touch targets, more whitespace. This isn't a developer tool — it's a learning environment. Breathing room signals safety.</p>
+  </div>
+  <div style="max-width: 640px;">
+    <div class="sp-row"><div class="sp-name">sp-1</div><div class="sp-val">4px</div><div><div class="sp-bar" style="width: 4px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-2</div><div class="sp-val">8px</div><div><div class="sp-bar" style="width: 8px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-3</div><div class="sp-val">12px</div><div><div class="sp-bar" style="width: 12px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-4</div><div class="sp-val">16px</div><div><div class="sp-bar" style="width: 16px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-6</div><div class="sp-val">24px</div><div><div class="sp-bar" style="width: 24px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-8</div><div class="sp-val">32px</div><div><div class="sp-bar" style="width: 32px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-12</div><div class="sp-val">48px</div><div><div class="sp-bar" style="width: 48px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-16</div><div class="sp-val">64px</div><div><div class="sp-bar" style="width: 64px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-20</div><div class="sp-val">80px</div><div><div class="sp-bar" style="width: 80px;"></div></div></div>
+    <div class="sp-row"><div class="sp-name">sp-24</div><div class="sp-val">96px</div><div><div class="sp-bar" style="width: 96px;"></div></div></div>
+  </div>
+  <div style="margin-top: 24px; padding: 16px 20px; background: var(--blue-tint); border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent); border-radius: var(--r-3);">
+    <div style="font-size: 13px; color: var(--fg);"><strong>Academy rule:</strong> minimum touch target is 48px height. Line height for body text is always ≥ 1.65. Section padding uses sp-20 (80px) minimum. Print margins: 20mm all sides.</div>
+  </div>
+</section>
+
+<!-- 08 PARENT BRAND BRIDGE -->
+<section class="sec" id="bridge">
+  <div class="sec-head">
+    <div class="sec-num"><b>08</b> / Brand Bridge</div>
+    <h2 class="sec-title">Academy <em>inherits</em> from parent.</h2>
+    <p class="sec-lede">How this sub-brand relates to the parent Outer Orbit system — what carries over, what changes, and where the two can coexist.</p>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="label" style="margin-bottom: 16px;">What Academy inherits</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px;">
+          <strong>The orbit mark</strong> — the core logomark is unchanged. It anchors Academy to the parent brand.
+        </div>
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px;">
+          <strong>JetBrains Mono</strong> — used for metadata, labels, and course codes. Subtle visual thread to the parent.
+        </div>
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px;">
+          <strong>4px spacing system</strong> — same base grid. Layouts compose predictably across both systems.
+        </div>
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--r-2); font-size: 13px;">
+          <strong>Steel blue family</strong> — the parent's #3B7BC7 and the Academy's blue are in the same hue family. Not identical, but harmonious.
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="label" style="margin-bottom: 16px;">What Academy changes</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid color-mix(in srgb, var(--sand) 40%, transparent); border-radius: var(--r-2); font-size: 13px;">
+          <strong style="color: oklch(48% 0.08 76);">Background mode</strong> — dark (#0B0D10) becomes warm off-white (#F8F7F4). Print-first, accessibility-first.
+        </div>
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid color-mix(in srgb, var(--sand) 40%, transparent); border-radius: var(--r-2); font-size: 13px;">
+          <strong style="color: oklch(48% 0.08 76);">Type system</strong> — Space Grotesk replaced by Plus Jakarta Sans. Warmer, rounder, more approachable to general audiences.
+        </div>
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid color-mix(in srgb, var(--sand) 40%, transparent); border-radius: var(--r-2); font-size: 13px;">
+          <strong style="color: oklch(48% 0.08 76);">Accent colors</strong> — electric neon yellow retired. Teal and sand replace it with human warmth.
+        </div>
+        <div style="padding: 14px 16px; background: var(--bg-card); border: 1px solid color-mix(in srgb, var(--sand) 40%, transparent); border-radius: var(--r-2); font-size: 13px;">
+          <strong style="color: oklch(48% 0.08 76);">Component radius</strong> — sharper (--r-2: 4px) becomes softer (--r-2: 6px, --r-pill on buttons). Rounded = approachable.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side by side comparison -->
+  <div style="margin-top: 32px;">
+    <div class="label" style="margin-bottom: 16px;">Side by side — parent vs. Academy</div>
+    <div class="two-col">
+      <div style="background: #0B0D10; border-radius: var(--r-4); padding: 28px; border: 1px solid #23272E;">
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #3B7BC7; margin-bottom: 14px;">↑ Parent · Outer Orbit</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -.02em; color: #F2F3F5; line-height: 1.1; margin-bottom: 10px;">Built for builders.<br>Dark, fast, sharp.</div>
+        <div style="font-size: 13px; color: #A5ABB5; margin-bottom: 16px;">Developer tools, B2B product, technical audience. High-density information. Power-user conventions.</div>
+        <div style="display: flex; gap: 8px;">
+          <div style="background: #3B7BC7; color: white; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 500; padding: 8px 14px; border-radius: 4px;">Deploy</div>
+          <div style="background: #16191E; color: #F2F3F5; font-family: 'Space Grotesk', sans-serif; font-size: 12px; padding: 8px 14px; border-radius: 4px; border: 1px solid #2F343C;">Cancel</div>
+        </div>
+      </div>
+      <div style="background: var(--bg); border-radius: var(--r-4); padding: 28px; border: 1px solid var(--line);">
+        <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px;">↓ Academy · Sub-brand</div>
+        <div style="font-size: 24px; font-weight: 700; letter-spacing: -.02em; color: var(--fg); line-height: 1.1; margin-bottom: 10px;">Built for humans.<br>Light, warm, clear.</div>
+        <div style="font-size: 13px; color: var(--fg-dim); margin-bottom: 16px;">Learning environment, 50+ audience, general public. Generous spacing. Plain language always.</div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn primary sm">Start Learning</button>
+          <button class="btn secondary sm">Preview</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div>
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+      <svg width="32" height="32" viewBox="179 -30 260 260" fill="var(--navy)">
+        <path d="M235.81,80.96c-5.35,13.73-7.11,33.44,3.03,40.17,4.47,2.96,11.36,4.52,17.06,3.15,38.36-9.24,69.78-34.89,90.7-68.34-11.19,44.43-55.95,75.79-100.86,85.44-1.57.34-2.33,2.14-1.44,3.46,1.2,1.78,2.48,3.49,3.9,5.21,2.76,3.34,7.26,4.76,11.42,3.55,54.79-16,92.4-59.02,94.57-117.41,32.79,27.01,41.18,71.72,22.63,108.08-13.16,25.8-38.15,43.32-64.5,47.42-30.89,4.8-59.53-5.66-79.97-27.68-25.52-27.51-31.03-66.16-14.08-99.31C243.77,14.85,307.69.2,351.99,34.5l-3.1,5.34c-13.05-8-26.47-13.68-42.31-13.73-33.13-.11-60.97,24.88-64.83,57.72-.75,6.41.54,13.3,3.59,18.6,9.26,16.11,54.33-8.8,72.81-22.49-16.71,17.93-63.6,48.52-77.77,28.94-5.88-8.12-4.56-17.86-4.57-27.91ZM285.05,175.65c32.43,10.1,66.9-3.08,83.43-32.9,16.32-29.44,12.37-67.63-10.32-92.71-4.89,49.16-36.11,87.95-80.85,105.13-4.22,1.62-8.87,6.65-5.85,10.92s8.12,6.72,13.59,9.56Z"/>
+        <path d="M334.23,58.56c-14.58-10.99-31.48-14.14-49.62-9.22-14.67,3.98-27.96,15.56-36.03,30.91,2.22-18.98,16.08-33.21,33.79-38.6,20.04-6.09,41.48-1.72,57.27,10.89l-5.41,6.03Z"/>
+        <path d="M282.75,158.64c19.14-8.1,34.8-18.31,48.47-33.13-8.97,17.34-26.48,25.45-41.64,38.44,21.18,4.69,41.88-5.57,53.7-19.59,13.59-16.13,17.96-37.6,11.36-57.41l4.11-10.34c9.81,21.05,9.12,43.22-2.54,63.69-14.55,25.54-49.46,41.74-74.32,27.76-1.18-.66-3.09-3.41-3.26-4.75s2.42-3.94,4.13-4.67Z"/>
+      </svg>
+      <div>
+        <div style="font-size: 15px; font-weight: 700; letter-spacing: -.01em;">Outer Orbit Academy</div>
+        <div style="font-size: 12px; color: var(--fg-dim);">Brand &amp; Design System v1.0 · April 2026</div>
+      </div>
+    </div>
+    <div style="font-size: 13px; color: var(--fg-dim); max-width: 420px; line-height: 1.6;">This document is the single source of truth for the Academy sub-brand. All marketing, course materials, and product UI should inherit from these tokens and guidelines.</div>
+  </div>
+  <div class="foot-label">
+    <div>outerorbitacademy.com</div>
+    <div>Sub-brand of Outer Orbit</div>
+    <div style="margin-top: 8px;"><a href="Outer Orbit Design System.html" style="color: var(--blue); text-decoration: none; font-size: 11px;">↑ View Parent Design System</a></div>
+  </div>
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
